@@ -40,6 +40,12 @@ function mysql_string($string){
 function sha1_uniqid(){
     return mysql_string(sha1(uniqid(rand(),true)));
 }
+//登录状态 在登录状态下防止通过直接在浏览器里通过输入register.php来注册
+function block_login_reg(){
+    if (isset($_COOKIE['username'])){
+        alert_back('登录状态下无法进行本操作');
+    }
+}
 //销毁session
 function session_d(){
     session_destroy();
@@ -48,6 +54,8 @@ function session_d(){
 function cookie_d(){
     setcookie('username','',time()-1);
     setcookie('uniqid','',time()-1);
+    session_d();
+    location('null','index.php');
 }
 //生成验证码
 /*

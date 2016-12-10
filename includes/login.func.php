@@ -43,4 +43,28 @@ function check_vcode($input_code,$output_code){
         alert_back('验证码不正确');
     }
 }
+//设置登录Cookie
+function setlogincookies($username,$uniqid,$keep_time){
+    switch ($keep_time){
+        case '0'://浏览器进程，关闭即清空
+            setcookie('username',$username);
+            setcookie('uniqid',$uniqid);
+            break;
+        case '1'://一天
+            setcookie('username',$username,time()+60*60*24);
+            setcookie('uniqid',$uniqid,time()+60*60*24);
+            break;
+        case '2'://一周
+            setcookie('username',$username,time()+60*60*24*7);
+            setcookie('uniqid',$uniqid,time()+60*60*24*7);
+            break;
+        case '3'://一月
+            setcookie('username',$username,time()+60*60*24*30);
+            setcookie('uniqid',$uniqid,time()+60*60*24*30);
+            break;
+
+
+
+    }
+}
 

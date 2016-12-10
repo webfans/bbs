@@ -7,6 +7,8 @@ define('SCRIPT','login');
 //
 //引入公共文件
 require dirname(__FILE__).'/includes/common.inc.php';
+//登录状态下 防止注册
+block_login_reg();
 if ($_GET['action']=='login'){
     //include 在需要时引入
     include ROOT_PATH.'includes/login.func.php';
@@ -22,10 +24,13 @@ if ($_GET['action']=='login'){
     //从数据库调取数据开始比对
     $sql="select u_username,u_uniqid from bbs_user WHERE u_username='{$clean['username']}'AND u_password='{$clean['password']}' AND u_active='' limit 1";
     if (!!$rows=fetch_array($sql)){
-       location('null','index.php');
+        //登录成功后写入cookie
+        setlogincookies($rows['u_username'],$rows['u_uniqid'],$clean['time']);
+        location('null','index.php');
         //打印出数据
         //echo $rows['u_username'];
         //echo $rows['u_uniqid'];
+
         close();
         session_d();
     }
