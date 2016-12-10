@@ -12,8 +12,9 @@ if (PHP_VERSION<'4.1.0'){
     exit('Version is too low');
 }
 //引入核心函数库
-require_once ROOT_PATH.'includes\global.func.php';
-require_once ROOT_PATH.'includes\mysql.func.php';
+//在winodws下 最初这样写includes\global.func.php 在linuxq情况下就会引起 require 出错
+require_once ROOT_PATH.'includes/global.func.php';
+require_once ROOT_PATH.'includes/mysql.func.php';
 
 define('START_TIME',runtime());
 
