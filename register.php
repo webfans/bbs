@@ -8,6 +8,8 @@ define('SCRIPT','register');
 require dirname(__FILE__).'/includes/common.inc.php';
 #测试数据时候能插入成功
 #mysql_query("insert into bbs_user(u_question) VALUES('howoldareu')") or  die('sql执行错误'.mysql_error());
+//登录状态下 防止注册
+block_login_reg();
 //判断是否提交了数据 数据提交到本页
 if ($_GET['action']=='register'){
     //include 在需要时引入
