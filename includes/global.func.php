@@ -44,6 +44,11 @@ function sha1_uniqid(){
 function session_d(){
     session_destroy();
 }
+//销毁cookie
+function cookie_d(){
+    setcookie('username','',time()-1);
+    setcookie('uniqid','',time()-1);
+}
 //生成验证码
 /*
  @vode()
