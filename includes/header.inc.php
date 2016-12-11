@@ -24,6 +24,7 @@ if (!defined('IN_TG')){
 
         ?>
 
+        <li><a href="blog.php">博友</a></li>
         <li>风格</li>
         <li>管理</li>
         <?php
