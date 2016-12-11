@@ -1,6 +1,9 @@
 <?php
 session_start();
 //指定一个常量 用来授权能不能调用文件
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 define('IN_TG',true);
 //定义一个常量 用来指定本页的内容
 define('SCRIPT','register');
