@@ -7,12 +7,15 @@
 //define('DB_USER','root');
 //define('DB_PWD',398692315);
 //define('DB_NAME','bbs');
+
 //以上常量已经在common.inc.php 定义过了，如果重复定义将导致错误 Notice: Constant DB_HOST already defined in
 //连接数据库函数
+
 function connect(){
     //在函数内部将$conn资源句柄声明为全局变量，这样在函数外部也就可以识别$conn了
     global $conn;
-    if (!$conn=mysql_connect(DB_HOST,DB_USER,DB_PWD)){
+    $conn=mysql_connect(DB_HOST,DB_USER,DB_PWD);
+    if (!$conn){
         exit('数据库连接失败');
     }
 }
