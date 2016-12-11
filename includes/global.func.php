@@ -1,5 +1,5 @@
 <?php
-session_start();
+//ession_start();//调用页有自己的session_start() 移除重复
 //获取运行耗时
 /*
  @runtime()
