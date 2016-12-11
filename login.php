@@ -9,7 +9,7 @@ define('SCRIPT','login');
 require dirname(__FILE__).'/includes/common.inc.php';
 //登录状态下 防止注册
 block_login_reg();
-if ($_GET['action']=='login'){
+if (@$_GET['action']=='login'){
     //include 在需要时引入
     include ROOT_PATH.'includes/login.func.php';
     //验证码验证
