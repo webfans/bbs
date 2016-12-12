@@ -14,7 +14,7 @@
 function connect(){
     //在函数内部将$conn资源句柄声明为全局变量，这样在函数外部也就可以识别$conn了
     global $conn;
-    $conn=mysql_connect(DB_HOST,DB_USER,DB_PWD);
+    $conn=@mysql_connect(DB_HOST,DB_USER,DB_PWD);
     if (!$conn){
         exit('数据库连接失败');
     }
@@ -35,16 +35,22 @@ function set_names(){
 }
 //返回结果集
 function query($sql){
-    $result=mysql_query($sql);
+    $result=@mysql_query($sql);
     if (!$result){
         exit('sql执行错误'.mysql_error());
     }
     return $result;
 }
 //返回一个查询结果集到数组
+//只能获取指定数据集中的一条数据组
 function fetch_array($sql){
     return mysql_fetch_array(query($sql),MYSQL_ASSOC);
 
+}
+//返回一个查询结果集到数组
+//可以返回指定数据集中的所有数据组
+function fetch_array_lsit($result){
+    return mysql_fetch_array($result,MYSQL_ASSOC);
 }
 //判断数据库中是否存在重复数据
 function is_repeat($sql,$msg){
