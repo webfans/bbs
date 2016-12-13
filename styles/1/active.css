@@ -1,9 +1,9 @@
 #active{
-    width:auto;
-    height: 300px;
-    border: 2px solid #ccc;
-    font-size: 12px;
-}
+     width:auto;
+     height: 300px;
+     border: 2px solid #ccc;
+     font-size: 12px;
+ }
 #active h2{
     text-indent: 0;
     text-align: center;
