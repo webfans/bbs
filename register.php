@@ -14,12 +14,12 @@ require dirname(__FILE__).'/includes/common.inc.php';
 //登录状态下 防止注册
 block_login_reg();
 //判断是否提交了数据 数据提交到本页
-if ($_GET['action']=='register'){
+if (@$_GET['action']=='register'){
     //include 在需要时引入
     include ROOT_PATH.'includes/register.func.php';
     //为了防止恶意注册和跨
     //验证码正确才进行数据授受
-    check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    //check_vcode($_POST['vcode'],$_SESSION['vcode']);
     //授受数据
     //创建一个空数据用来放提交过来的合法的数据
     $clean=array();
@@ -35,7 +35,7 @@ if ($_GET['action']=='register'){
     $clean['sex']=check_sex($_POST['sex']);
     $clean['face']=check_face($_POST['textface']);
     $clean['answer']=check_answer($_POST['question'],$_POST['answer'],2,20);
-    $clean['email']=check_emial($_POST['email'],6,20);
+    $clean['email']=check_emial($_POST['email'],6,30);
     $clean['qq']=check_qq($_POST['qq']);
     $clean['url']=check_url($_POST['url'],40);
     #print_r($clean);
