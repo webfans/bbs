@@ -12,11 +12,11 @@
 }
 #blog dl{
     width: 150px;
-
+    float:left;
 }
 #blog dl dt{
     width: 150px;
-    margin-bottom:5px;
+    margin:0 0 5px 0;
 }
 #blog dl dt img{
     margin:0 auto;
@@ -26,11 +26,23 @@
     height: 20px;
     line-height: 20px;
     text-align: center;
-    float: left;
     width: 75px;
+    float: left;
 }
 #blog dl dd.user{
-    float: none;
+    clear: both;
     width: 150px;
     color: #f60;
+}
+#blog dl dd.message{
+    background: url("../../images/x1.gif") no-repeat 10% 35%;
+}
+#blog dl dd.friend{
+    background: url("../../images/x2.gif") no-repeat left center;
+}
+#blog dl dd.guest{
+    background: url("../../images/x3.gif") no-repeat 10% 35%;
+}
+#blog dl dd.flower{
+    background: url("../../images/x4.gif") no-repeat left center;
 }
