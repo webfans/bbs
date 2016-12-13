@@ -67,3 +67,6 @@ h2{
 #footer p span{
     color: #0066ff;
 }
+#page_num{
+    clear: both;
+}
