@@ -69,4 +69,30 @@ h2{
 }
 #page_num{
     clear: both;
+    width: auto;
+    height: 20px;
+    position: relative;/*相对点*/
+}
+#page_num ul{
+    height: 20px;
+    position: absolute;/*绝对点，以上边的相对点为容器放在容器的绝对右边*/
+    right: 30px;
+}
+#page_num ul li{
+    float: left;
+    width: 24px;
+}
+#page_num ul li a{
+    height: 20px;
+    width: 20px;
+    display: block;
+    border: 1px solid #333;
+    text-decoration: none;
+    text-align: center;
+    line-height: 20px;
+}
+#page_num ul li a:hover,#page_num ul li a.selected{
+    background: #666;
+    font-weight: bold;
+    color: #fff;
 }
