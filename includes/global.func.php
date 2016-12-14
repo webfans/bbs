@@ -28,12 +28,12 @@ function location($msg,$url){
 function mysql_string($string){
     //get_magic_quotes_gpc()如果开启状态，那么就不需要转义
     if (!GPC){
-        $conn=mysql_connect('localhost','root','398692315');
+        $conn=@mysql_connect('localhost','root','398692315');
         if (!$conn)
         {
             die('Could not connect: ' . mysql_error());
         }
-        return mysql_real_escape_string($string,$conn);
+        return @mysql_real_escape_string($string,$conn);
     }
     return $string;
 }
