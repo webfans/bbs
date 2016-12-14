@@ -96,3 +96,16 @@ h2{
     font-weight: bold;
     color: #fff;
 }
+#page_text{
+    clear: both;
+    padding: 10px 0;
+    height: 20px;
+}
+#page_text ul{
+    text-align: center;
+}
+#page_text ul li{
+    display: inline;
+    padding-left: 10px;
+
+}
