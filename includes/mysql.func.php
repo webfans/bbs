@@ -45,11 +45,10 @@ function query($sql){
 //只能获取指定数据集中的一条数据组
 function fetch_array($sql){
     return mysql_fetch_array(query($sql),MYSQL_ASSOC);
-
 }
 //返回一个查询结果集到数组
 //可以返回指定数据集中的所有数据组
-function fetch_array_lsit($result){
+function fetch_array_list($result){
     return mysql_fetch_array($result,MYSQL_ASSOC);
 }
 //判断数据库中是否存在重复数据
