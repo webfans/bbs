@@ -51,6 +51,10 @@ function fetch_array($sql){
 function fetch_array_list($result){
     return mysql_fetch_array($result,MYSQL_ASSOC);
 }
+//mysql_num_rows() 函数返回结果集中行的数目。
+function num_rows($result){
+    return mysql_num_rows($result);
+}
 //判断数据库中是否存在重复数据
 function is_repeat($sql,$msg){
     if (fetch_array($sql)){
