@@ -126,3 +126,90 @@ function vcode($width=75,$height=25,$vcode_num=4,$border_flag=false){
 //销毁图像
     imagedestroy($img);
 }
+//分页容错函数
+function paging_fault_tolerant($sql,$size){
+    //这样外部调用页的sql 才能认识这两个函数内部变量的值
+    global  $_pagesize,$_pagenum;
+    //这样的话下边的分页pageing()函数才能认识这几个变量取到值
+    global $_page,$_page_absolute,$total_num;
+    if (isset($_GET['page'])){
+        $_page=@$_GET['page'];
+        if (empty($_page)||$_page<0||!is_numeric($_page)){
+            //防止page存在，但是空值（0）或是负值
+            $_page=1;
+        }else{
+            //防止$page=2.5这种小数情况，把它取为整数
+            $_page=intval($_page);
+        }
+    } else{
+        //如果直接访问blog.php显然page不存在，则默认page是0，则导致$_pagenum=负值，进而引起sql执行出错
+        //所以默认给它赋值1，是为容错处理
+        $_page=1;
+    }
+    //每页多少条数据
+    $_pagesize=$size;
+    //从第几条数据开始读起
+    $_pagenum=($_page-1)*$_pagesize;
+    //首页得到所有数据总条数
+    $total_num=mysql_num_rows(query($sql));
+    //!防止数据库清零后，总数据数为0的情况
+    if ($total_num==0){
+        $_page_absolute=1;
+    }else{
+        //数据库里有数据
+        //ceil()进一取整法,例如$_page_absolute=3.1也算为4页
+        //根据总数据条总算出页码数
+        $_page_absolute=ceil($total_num/$_pagesize);
+        //echo $_page_absolute;
+    }
+    //处理 如果page>总页码数的情况
+    if ($_page>$_page_absolute){
+        $_page=$_page_absolute;
+    }
+}
+//分页函数
+function paging($paging_type){
+    //这里把这几个变量声明为全局变量，这样才能用blog.php页面在该函数声明的变量的值
+    //另外一种访问函数外变量的值，就是直接参数传递
+    global $_page,$_page_absolute,$total_num;
+    #1数字分页
+    if ($paging_type=='text'||$paging_type==1){
+         echo '<div id="page_num">';
+            echo '<ul>';
+                for ($i=0;$i<$_page_absolute;$i++){
+                    if ($_page==($i+1)){
+                        echo '<li><a class="selected" href="blog.php?page='.($i+1).'">'.($i+1).'</a> </li>';
+                    }
+                    else{
+                        echo '<li><a href="blog.php?page='.($i+1).'">'.($i+1).'</a> </li>';
+                    }
+                }
+            echo '</ul>';
+        echo '</div>';
+        ##2文本分页
+    } elseif ($paging_type=='num'||$paging_type==2){
+             echo '<div id="page_text">';
+                echo '<ul>';
+                        echo '<li>'.$_page.'/'.$_page_absolute.'页 |</li>';
+                        echo '<li>共有<strong>'.$total_num.'</strong>位会员 |</li>';
+                    if($_page==1){
+                        //如果是首页 那么首页和上一面无效不能点击
+                        echo '<li>首页</li>';
+                        echo '<li>上一页</li>';
+                    }else{
+                        //echo '<li><a href="'.$_SERVER[SCRIPT_NAME].'.php">首页</a> </li>';
+                        echo '<li><a href="'.SCRIPT.'.php">首页</a> </li>';
+                        echo '<li><a href="'.SCRIPT.'.php?page='.($_page-1).'">上一页</a> </li>';
+                    }
+                    if ($_page==$_page_absolute){
+                        //如果是尾页则尾页和下一页无效不能点击
+                        echo '<li>下一页</li>';
+                        echo '<li>尾页</li>';
+                    }else{
+                        echo '<li><a href="'.SCRIPT.'.php?page='.($_page+1).'">下一页</a> </li>';
+                        echo '<li><a href="'.SCRIPT.'.php?page='.$_page_absolute.'">尾页</a> </li>';
+                    }
+                echo '</ul>';
+            echo '</div>';
+        }
+    }
