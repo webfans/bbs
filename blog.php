@@ -17,45 +17,9 @@ require dirname(__FILE__).'/includes/common.inc.php';
  * page=3 说明是第3页数据 表示21-30条数据 LIMIT 20,10; $page_num=20;
  *  */
 //分页容错处理
-if (isset($_GET['page'])){
-    $_page=@$_GET['page'];
-    if (empty($_page)||$_page<0||!is_numeric($_page)){
-        //防止page存在，但是空值（0）或是负值
-        $_page=1;
-    }else{
-        //防止$page=2.5这种小数情况，把它取为整数
-        $_page=intval($_page);
-    }
-}
-else{
-    //如果直接访问blog.php显然page不存在，则默认page是0，则导致$_pagenum=负值，进而引起sql执行出错
-    //所以默认给它赋值1，是为容错处理
-    $_page=1;
-}
-
-//每页多少条数据
-$_pagesize=3;
-//从第几条数据开始读起
-$_pagenum=($_page-1)*$_pagesize;
-//首页得到所有数据总条数
-$total_num=mysql_num_rows(query("select u_id from bbs_user"));
-//防止数据库清零后，总数据数为0的情况
-if ($total_num==0){
-    $_page_absolute=1;
-}else{
-    //数据库里有数据
-    //ceil()进一取整法,例如$_page_absolute=3.1也算为4页
-    //根据总数据条总算出页码数
-    $_page_absolute=ceil($total_num/$_pagesize);
-    //echo $_page_absolute;
-}
-//处理 如果page>总页码数的情况
-if ($_page>$_page_absolute){
-    $_page=$_page_absolute;
-}
-
-
-
+global $_pagenum,$_pagesize;
+$sql="select u_id from bbs_user";
+paging_fault_tolerant($sql,4);
 
 //从数据库读取数据
 $sql="select u_username,u_sex,u_face from bbs_user ORDER BY u_regtime DESC LIMIT $_pagenum,$_pagesize";
@@ -90,32 +54,13 @@ require ROOT_PATH.'includes/header.inc.php';
         <dd class="flower">给他送花</dd>
     </dl>
     <?php } ?>
+<?php
+//调用分页函数
+paging(1);
+paging('num');
+?>
 
-    <div id="page_num">
-        <ul>
-            <?php
-            for ($i=0;$i<$_page_absolute;$i++){
-                if ($_page==($i+1)){
-                    echo '<li><a class="selected" href="blog.php?page='.($i+1).'">'.($i+1).'</a> </li>';
-                }
-                else{
-                    echo '<li><a href="blog.php?page='.($i+1).'">'.($i+1).'</a> </li>';
-                }
 
-            }
-            ?>
-        </ul>
-    </div>
-    <div id="page_text">
-        <ul>
-            <li><?php echo $_page;?>/<?php echo $_page_absolute;?>页  |</li>
-            <li>共有<strong><?php echo $total_num;?></strong>位会员  |</li>
-            <li>首页  |</li>
-            <li>上一页  |</li>
-            <li>下一页  |</li>
-            <li>尾页  |</li>
-        </ul>
-    </div>
 
 </div>
 
