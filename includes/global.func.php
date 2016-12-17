@@ -132,10 +132,11 @@ function paging_fault_tolerant($sql,$size){
     global  $_pagesize,$_pagenum;
     //这样的话下边的分页pageing()函数才能认识这几个变量取到值
     global $_page,$_page_absolute,$total_num;
+    
     if (isset($_GET['page'])){
         $_page=@$_GET['page'];
         if (empty($_page)||$_page<0||!is_numeric($_page)){
-            //防止page存在，但是空值（0）或是负值
+            //防止page存在，但是空值（0）或是负值或不是数字
             $_page=1;
         }else{
             //防止$page=2.5这种小数情况，把它取为整数
@@ -150,15 +151,16 @@ function paging_fault_tolerant($sql,$size){
     $_pagesize=$size;
     //从第几条数据开始读起
     $_pagenum=($_page-1)*$_pagesize;
-    //首页得到所有数据总条数
+    
+    //统计数据库中数据总条数
     $total_num=mysql_num_rows(query($sql));
-    //!防止数据库清零后，总数据数为0的情况
+    //!防止数据库清零后(数据库没数据)，总数据条数为0的情况
     if ($total_num==0){
         $_page_absolute=1;
     }else{
         //数据库里有数据
         //ceil()进一取整法,例如$_page_absolute=3.1也算为4页
-        //根据总数据条总算出页码数
+        //根据总数据条数，算出总页码数
         $_page_absolute=ceil($total_num/$_pagesize);
         //echo $_page_absolute;
     }
@@ -172,12 +174,13 @@ function paging($paging_type){
     //这里把这几个变量声明为全局变量，这样才能用blog.php页面在该函数声明的变量的值
     //另外一种访问函数外变量的值，就是直接参数传递
     global $_page,$_page_absolute,$total_num;
-    #1数字分页
+    #1数字分页模式 
     if ($paging_type=='text'||$paging_type==1){
          echo '<div id="page_num">';
             echo '<ul>';
                 for ($i=0;$i<$_page_absolute;$i++){
                     if ($_page==($i+1)){
+                    	 //加上当前页选中状态的样式
                         echo '<li><a class="selected" href="blog.php?page='.($i+1).'">'.($i+1).'</a> </li>';
                     }
                     else{
@@ -186,14 +189,14 @@ function paging($paging_type){
                 }
             echo '</ul>';
         echo '</div>';
-        ##2文本分页
+        ##2文本分页模式
     } elseif ($paging_type=='num'||$paging_type==2){
              echo '<div id="page_text">';
                 echo '<ul>';
                         echo '<li>'.$_page.'/'.$_page_absolute.'页 |</li>';
                         echo '<li>共有<strong>'.$total_num.'</strong>位会员 |</li>';
                     if($_page==1){
-                        //如果是首页 那么首页和上一面无效不能点击
+                        //如果是首页，那么首页和上一页无效，不能点击
                         echo '<li>首页</li>';
                         echo '<li>上一页</li>';
                     }else{
@@ -202,7 +205,7 @@ function paging($paging_type){
                         echo '<li><a href="'.SCRIPT.'.php?page='.($_page-1).'">上一页</a> </li>';
                     }
                     if ($_page==$_page_absolute){
-                        //如果是尾页则尾页和下一页无效不能点击
+                        //如果是尾页，则尾页和下一页无效，不能点击
                         echo '<li>下一页</li>';
                         echo '<li>尾页</li>';
                     }else{
@@ -213,3 +216,17 @@ function paging($paging_type){
             echo '</div>';
         }
     }
+
+//转义HTML特殊字符
+//如果是数组按数组的方式过滤，如果是字符串则按字符串方式过渡
+function html_spec($str){
+    if (is_array($str)){
+        foreach ($str as $key=>$value){
+            //$str[$key]=htmlspecialchars($value);//方法一
+            $str[$key]=html_spec($value);//此处用了递归 //方法二
+        }
+    }else{
+        $str=htmlspecialchars($str);
+    }
+    return $str;
+}
