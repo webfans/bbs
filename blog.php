@@ -44,10 +44,19 @@ require ROOT_PATH.'includes/header.inc.php';
     <!--while(!!rows=fetch_array($sql))将导致死循环，一直取出数据库第一条数据-->
     <!--while(!!rows=mysql_fetch_array($result)),是没问题的-->
     <!--我们必须是每次重新读取结果集，而不是每次重新执行一次SQL,而上边的fetch_array($sql)就是重复执行SQl导致死循环-->
-    <?php while(!!$rows=fetch_array_list($result)){?>
+    <?php
+        while(!!$rows=fetch_array_list($result)){
+            $_html=array();
+            $_html['username']=$rows['u_username'];
+            $_html['face']=$rows['u_face'];
+            $_html['sex']=$rows['u_sex'];
+            $_html=html_spec($_html);
+
+
+    ?>
     <dl>
-        <dd class="user"><?php echo $rows['u_username']?></dd>
-        <dt><img src="<?php echo $rows['u_face']?>" alt="root"/></dt>
+        <dd class="user"><?php echo $_html['username'];?></dd>
+        <dt><img src="<?php echo $_html['face'];?>" alt="root"/></dt>
         <dd class="message">发消息</dd>
         <dd class="friend">加好友</dd>
         <dd class="guest">写留言</dd>
