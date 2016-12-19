@@ -64,6 +64,8 @@ require ROOT_PATH.'includes/header.inc.php';
     </dl>
     <?php } ?>
 <?php
+//销毁数据集
+mysql_free_result($result);
 //调用分页函数
 paging(1);
 paging('num');
