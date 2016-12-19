@@ -65,6 +65,17 @@ function check_pwd($first_pwd,$second_pwd,$min_pwd){
     }
     return sha1($first_pwd);
 }
+function check_modify_pwd($first_pwd,$min_pwd){
+    //判断密码位数
+    if (!empty($first_pwd)){
+        if (strlen($first_pwd)<$min_pwd){
+            alert_back('密码倍数不能少于'.$min_pwd.'位');
+        }
+    }else{
+        return null;
+    }
+    return sha1($first_pwd);
+}
 
 function check_question($strings,$min_num,$max_num){
     $strings=trim($strings);
