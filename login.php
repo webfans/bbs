@@ -24,9 +24,17 @@ if (@$_GET['action']=='login'){
     //从数据库调取数据开始比对
     $sql="select u_username,u_uniqid from bbs_user WHERE u_username='{$clean['username']}'AND u_password='{$clean['password']}' AND u_active='' limit 1";
     if (!!$rows=fetch_array($sql)){
-        //登录成功后写入cookie
+        //登录成功后写入cookie,并记录IP,登录时间和次数
+        query("UPDATE bbs_user SET
+                                u_lasttime=NOW(),
+                                u_lastip='{$_SERVER['REMOTE_ADDR']}',
+                                u_loginnum=u_loginnum+1
+                              WHERE 
+                                 u_username='{$rows['u_username']}'
+                              ");
+
         setlogincookies($rows['u_username'],$rows['u_uniqid'],$clean['time']);
-        location('null','index.php');
+        location('null','member.php');
         //打印出数据
         //echo $rows['u_username'];
         //echo $rows['u_uniqid'];
