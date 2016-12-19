@@ -230,3 +230,10 @@ function html_spec($str){
     }
     return $str;
 }
+//为了防止Cookie伪造，还要比对一下唯一标识符uniquid
+function safe_uniquid($mysql_uniquid,$cookie_uniquid){
+    if ($mysql_uniquid!=$cookie_niquid){
+        alert_back('唯一标识符异常');
+    }
+}
+
