@@ -13,7 +13,7 @@ if (isset($_COOKIE['username'])){
     $sql="select u_username,u_sex,u_face,u_email,u_url,u_qq,u_regtime,u_level from bbs_user where u_username='{$_COOKIE['username']}'";;
     $rows=fetch_array($sql);
     //如果有数据，,或者数据库没有此用户，伪造用户cookie
-    if ($rows){
+    if (!!$rows){
        $html=array();
        $html['username']=$rows['u_username'];
        $html['sex']=$rows['u_sex'];
@@ -21,7 +21,7 @@ if (isset($_COOKIE['username'])){
        //$html['email']=$rows['u_email']."<html>";//转义测试
        $html['email']=$rows['u_email'];
        $html['url']=$rows['u_url'];
-       $html['qq']=$rows['u_url'];
+       $html['qq']=$rows['u_qq'];
        $html['regtime']=$rows['u_regtime'];
        //一次性转义数组，也可以分别每一行
        $html=html_spec($html);
