@@ -7,8 +7,8 @@ if (!defined('IN_TG')){
 <h2>会员中心</h2>
 <dl>
     <dt>账户管理</dt>
-    <dd><a href="###">人个信息</a> </dd>
-    <dd><a href="###">修改资料</a> </dd>
+    <dd><a href="member.php">人个信息</a> </dd>
+    <dd><a href="member_modify.php">修改资料</a> </dd>
 </dl>
 <dl>
     <dt>其它管理</dt>
