@@ -1,0 +1,28 @@
+body{
+    width: auto;
+}
+#message h2{
+    text-align: center;
+}
+#message dl{
+    width: 90%;
+    margin: 0 auto;/*水平剧中*/
+}
+#message dl dd{
+    margin: 5px 0;
+}
+#message dl dd input.text{
+    width: 180px;
+    height: 19px;
+    background: #fff;
+    border: 1px dashed #333
+}
+#message dl dd input.yzm{
+    width: 60px;
+}
+#message dl dd textarea{
+    width: 100%;
+    background: #fff;
+    height: 110px;
+    border: 1px dashed #333;
+}
