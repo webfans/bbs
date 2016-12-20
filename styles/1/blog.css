@@ -37,6 +37,10 @@
 #blog dl dd.message{
     background: url("../../images/x1.gif") no-repeat 10% 35%;
 }
+#blog dl dd a:hover{
+    cursor: pointer;
+}
+    
 #blog dl dd.friend{
     background: url("../../images/x2.gif") no-repeat left center;
 }
