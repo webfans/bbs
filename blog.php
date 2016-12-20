@@ -22,7 +22,7 @@ $sql="select u_id from bbs_user";
 paging_fault_tolerant($sql,4);
 
 //从数据库读取数据
-$sql="select u_username,u_sex,u_face from bbs_user ORDER BY u_regtime DESC LIMIT $_pagenum,$_pagesize";
+$sql="select u_id,u_username,u_sex,u_face from bbs_user ORDER BY u_regtime DESC LIMIT $_pagenum,$_pagesize";
 //取得 数据集
 $result=query($sql);
 ?>
@@ -30,6 +30,7 @@ $result=query($sql);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" src="js/blog.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
     <title>博友页面</title>
 </head>
@@ -47,6 +48,7 @@ require ROOT_PATH.'includes/header.inc.php';
     <?php
         while(!!$rows=fetch_array_list($result)){
             $_html=array();
+            $_html['id']=$rows['u_id'];
             $_html['username']=$rows['u_username'];
             $_html['face']=$rows['u_face'];
             $_html['sex']=$rows['u_sex'];
@@ -57,7 +59,7 @@ require ROOT_PATH.'includes/header.inc.php';
     <dl>
         <dd class="user"><?php echo $_html['username'];?></dd>
         <dt><img src="<?php echo $_html['face'];?>" alt="root"/></dt>
-        <dd class="message">发消息</dd>
+        <dd class="message"><a name="message" title="<?php echo $_html['id']?>">发消息</a></dd>
         <dd class="friend">加好友</dd>
         <dd class="guest">写留言</dd>
         <dd class="flower">给他送花</dd>
@@ -70,8 +72,6 @@ mysql_free_result($result);
 paging(1);
 paging('num');
 ?>
-
-
 
 </div>
 
