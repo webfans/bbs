@@ -148,3 +148,9 @@ function check_sex($str_sex){
 function check_face($str_face){
     return mysql_string($str_face);
 }
+function check_content($content,$min_num,$max_num){
+   if( mb_strlen($content,'utf-8')<$min_num||mb_strlen($content,'utf-8')>$max_num){
+       alert_back('短信内容不能小于'.$min_num.'位或大于'.$max_num.'位');
+   }
+   return $content;
+}
