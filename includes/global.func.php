@@ -15,6 +15,12 @@ function alert_back($msg){
     echo "<script type=text/javascript>alert('".$msg."');history.back();</script>";
     exit();
 }
+function alert_back_close($msg){
+    //history.go(-1):后退+刷新 history.back():后退
+    echo "<script type=text/javascript>alert('".$msg."');window.close();</script>";
+    exit();
+}
+
 //页面跳转
 function location($msg,$url){
     if (!$msg) {
@@ -33,7 +39,14 @@ function mysql_string($string){
         {
             die('Could not connect: ' . mysql_error());
         }
-        return @mysql_real_escape_string($string,$conn);
+        if (is_array($string)){
+            foreach ($string as $key=>$value){
+                //$str[$key]=htmlspecialchars($value);//方法一
+                $string[$key]=mysql_string($value);//此处用了递归 //方法二
+            }
+        }else{
+            $string=mysql_real_escape_string($string,$conn);
+        }
     }
     return $string;
 }
