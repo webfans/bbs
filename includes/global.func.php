@@ -194,10 +194,10 @@ function paging($paging_type){
                 for ($i=0;$i<$_page_absolute;$i++){
                     if ($_page==($i+1)){
                     	 //加上当前页选中状态的样式
-                        echo '<li><a class="selected" href="blog.php?page='.($i+1).'">'.($i+1).'</a> </li>';
+                        echo '<li><a class="selected" href="'.SCRIPT.'.php?page='.($i+1).'">'.($i+1).'</a> </li>';
                     }
                     else{
-                        echo '<li><a href="blog.php?page='.($i+1).'">'.($i+1).'</a> </li>';
+                        echo '<li><a href="'.SCRIPT.'.php?page='.($i+1).'">'.($i+1).'</a> </li>';
                     }
                 }
             echo '</ul>';
@@ -244,9 +244,16 @@ function html_spec($str){
     return $str;
 }
 //为了防止Cookie伪造，还要比对一下唯一标识符uniquid
-function safe_uniquid($mysql_uniquid,$cookie_uniquid){
-    if ($mysql_uniquid!=$cookie_niquid){
+function safe_uniquid($mysql_uniquid,$cookie_uniqid){
+    if ($mysql_uniquid!=$cookie_uniqid){
         alert_back('唯一标识符异常');
     }
+}
+//长文本以摘要的形式显示
+function summary($str){
+    if (mb_strlen($str,'utf-8')>14){
+        $str=mb_substr($str,1,14,'utf-8').'...';
+    }
+    return $str;
 }
 
