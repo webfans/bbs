@@ -11,12 +11,12 @@ define('SCRIPT','member_modify');
 require dirname(__FILE__).'/includes/common.inc.php';
 
 if (@$_GET['action']=='modify'){
-    include ROOT_PATH.'includes/register.func.php';
+    include ROOT_PATH.'includes/check.func.php';
     //验证码
     check_vcode($_POST['vcode'],$_SESSION['vcode']);
 
-    // 如果cookie慧，才允许提交修改数据验证
-    if (!!$rows=fetch_array("select u_uniquid from bbs_user wehere u_username='{$_COOKIE['username']}'")){
+    // 如果cookie存在，才允许提交修改数据验证
+    if (!!$rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")){
         //为了防止Cookie伪造，还要比对一下唯一标识符uniquid
         safe_uniquid($rows['u_uniquid'],$_COOKIE['uniquid']);
 
@@ -30,7 +30,7 @@ if (@$_GET['action']=='modify'){
         //print_r($clean);
         //开始修改资料
         if (empty($clean['password'])){
-            //如果密码
+            //如果密码为空
         }else{
             query("UPDATE bbs_user SET 
                                      u_password='{$clean['password']}',
@@ -73,7 +73,7 @@ if (isset($_COOKIE['username'])){
        //$html['email']=$rows['u_email']."<html>";//转义测试
        $html['email']=$rows['u_email'];
        $html['url']=$rows['u_url'];
-       $html['qq']=$rows['u_url'];
+       $html['qq']=$rows['u_qq'];
        $html['regtime']=$rows['u_regtime'];
 
        //一次性转义数组，也可以分别每一行
@@ -94,6 +94,7 @@ if (isset($_COOKIE['username'])){
                 $html['face_html'].='<option value=images/face/m'.$num.'.gif>m'.$num.'.gif</option>';
             }
         $html['face_html'].='</select>';
+        //会员级别
        switch ($rows['u_level']){
            case 0:
                $html['level']='普通会员';
