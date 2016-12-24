@@ -25,4 +25,8 @@ body{
     background: #fff;
     height: 110px;
     border: 1px dashed #333;
+    overflow-y: scroll;
+}
+#message dl dd input.submit{
+    cursor: pointer;
 }
