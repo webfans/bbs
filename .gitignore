@@ -50,3 +50,8 @@ Temporary Items
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/modules.xml
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+*.xml
+*.xml
+.idea/dataSources.xml
