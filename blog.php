@@ -16,7 +16,7 @@ require dirname(__FILE__).'/includes/common.inc.php';
  * page=2 说明是第2页数据 表示11-20条数据 LIMIT 10,10; $page_num=10;
  * page=3 说明是第3页数据 表示21-30条数据 LIMIT 20,10; $page_num=20;
  *  */
-//分页容错处理
+//分布模块 分页容错处理
 global $_pagenum,$_pagesize;
 $sql="select u_id from bbs_user";
 paging_fault_tolerant($sql,4);
