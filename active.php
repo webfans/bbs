@@ -16,21 +16,6 @@ if (isset($_GET['action']) && isset($_GET['active']) && $_GET['action']=='ok'){
     $active=mysql_string($_GET['active']);
     echo $active;
     $sql="select u_active from bbs_user WHERE u_active='$active' LIMIT 1";
-    /*if (!fetch_array($sql)) {
-        alert_back('非法操作');
-    } else {
-        //将u_active设置为空
-        $update_sql = "update bbs_user set u_active=null where u_active='$active'";
-        query($update_sql);
-        if (affetched_rows()==1) {
-            close();
-            location('账号激活成功', 'login.php');
-        } else {
-            close();
-            location('账号激活失败', 'register.php');
-        }
-
-    }*/
     if (fetch_array($sql)) {
         //将u_active设置为空
         $update_sql = "update bbs_user set u_active=NULL where u_active='$active' LIMIT 1";
