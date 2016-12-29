@@ -3,11 +3,18 @@
  */
 window.onload=function () {
     var message=document.getElementsByName('message');
+    var friend=document.getElementsByName('friend');
     //alert(message);
     for(var i=0;i<message.length;i++){
         message[i].onclick=function () {
            //alert(this.title);
             centerWindow('message.php?id='+this.title,'message',260,400);
+        };
+    }
+    for(var i=0;i<friend.length;i++){
+        friend[i].onclick=function () {
+            //alert(this.title);
+            centerWindow('friend.php?id='+this.title,'friend',260,400);
         };
     }
 };
