@@ -12,7 +12,7 @@ if (!isset($_COOKIE['username'])){
     alert_back_close('请登录后尝试');
 }
 //写短信
-if ($_GET['action']){
+if ($_GET['action']=='write'){
     //验证吗检验
     check_vcode($_POST['vcode'],$_SESSION['vcode']);
     if (!!$rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")){
@@ -86,7 +86,7 @@ if (isset($_GET['id'])){
     <form method="post" action="?action=write">
         <input type="hidden" name="touser" value="<?php echo $_html['touser'] ?>"/>
         <dl>
-            <dd><input type="text" class="text" value="<?php echo 'TO:'.$_html['touser'];?>"></dd><!--用来显示，上边的隐藏字段用来传递数据-->
+            <dd><input type="text" readonly="readonly" class="text" value="<?php echo 'TO:'.$_html['touser'];?>"></dd><!--用来显示，上边的隐藏字段用来传递数据-->
             <dd><textarea name="contents"></textarea></dd>
             <dd>验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/> </dd>
             <dd><input type="submit" name="submit" class="submit" value="发送短信"> </dd>
