@@ -60,7 +60,7 @@ require ROOT_PATH.'includes/header.inc.php';
         <dd class="user"><?php echo $_html['username'];?></dd>
         <dt><img src="<?php echo $_html['face'];?>" alt="root"/></dt>
         <dd class="message"><a name="message" title="<?php echo $_html['id']?>">发消息</a></dd>
-        <dd class="friend">加好友</dd>
+        <dd class="friend"><a name="friend" title="<?php echo $_html['id']?>">加好友</a></dd>
         <dd class="guest">写留言</dd>
         <dd class="flower">给他送花</dd>
     </dl>
