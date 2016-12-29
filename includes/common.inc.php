@@ -28,3 +28,15 @@ define('DB_NAME','bbs');
 connect(); //数据库连接
 selectdb(); //选择用户数据库
 set_names(); //设置字符集
+
+//短信提醒
+//统计未读取的短信数
+@$sql="select count(m_id) as counts from bbs_message where m_state=0 and m_touser='{$_COOKIE['username']}'";
+$result=query($sql);
+$message=fetch_array_list($result);//或者$message=fetch_array($sql);
+//print_r($message);
+if (empty($message['counts'])){
+    $msg='<strong class="read"><a href="member_message.php"><span>(0)</span></a> </strong>';
+}else{
+    $msg='<strong  class="noread"><a href="member_message.php"><span>('.$message['counts'].')</span></a></strong>';
+}
