@@ -42,8 +42,15 @@ if (@$_GET['action']=='delete'&&isset($_GET['msgid'])){
 
 }
 if (isset($_GET['id'])){
-    $rows=fetch_array("select m_id,m_fromuser,m_content,m_date from bbs_message where m_id='{$_GET['id']}'");
+    $rows=fetch_array("select m_id,m_fromuser,m_content,m_date,m_state from bbs_message where m_id='{$_GET['id']}'");
     if (!!$rows){
+        //进入短信详情，即表示此短信已经读过，故此时将 m_state由0更新为1
+        if ($rows['m_state']==0){
+            query("update bbs_message set m_state=1 where m_id='{$_GET['id']}'");
+        }
+        if (!affetched_rows()){
+            alert_back('异常');
+        }
         $_html=array();
         $_html['id']=$rows['m_id'];
         $_html['fromuser']=$rows['m_fromuser'];
