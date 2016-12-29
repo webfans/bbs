@@ -34,11 +34,7 @@ if (@$_GET['action']=='login'){
                               ");
 
         setlogincookies($rows['u_username'],$rows['u_uniqid'],$clean['time']);
-        location('null','member.php');
-        //打印出数据
-        //echo $rows['u_username'];
-        //echo $rows['u_uniqid'];
-
+        location('登录成功','member.php');
         close();
         session_d();
     }
