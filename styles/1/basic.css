@@ -31,6 +31,20 @@ h2{
 #header ul li{
     display: inline;
 }
+#header ul li strong.read{
+    background: url("../../images/read.gif") no-repeat left center;
+}
+#header ul li strong.noread{
+    background: url("../../images/remind.gif") no-repeat left center;
+}
+#header ul li strong.read span{
+    /*短信提示文字与小信封图标分开*/
+    margin-left:17px;
+}
+#header ul li strong.noread span{
+    /*短信提示文字与小信封图标分开*/
+    margin-left:28px;
+}
 #header ul li a{
     text-decoration: none;
     color: #333;
