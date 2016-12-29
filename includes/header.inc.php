@@ -11,7 +11,7 @@ if (!defined('IN_TG')){
 
         <?php
         if (isset($_COOKIE['username'])){
-            echo '<li><a href="member.php">'.$_COOKIE['username'].'·个人中心</a> </li>';
+            echo '<li><a href="member.php">'.$_COOKIE['username'].'·个人中心</a> '.$msg.'</li>';
             echo "\n";
         }
         else{
