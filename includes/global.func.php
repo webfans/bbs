@@ -23,7 +23,7 @@ function alert_back_close($msg){
 
 //页面跳转
 function location($msg,$url){
-    if (!$msg) {
+    if (!!$msg) {
         echo "<script type=text/javascript>alert('$msg');location.href='$url';</script>";
     }
     else{
@@ -61,7 +61,9 @@ function block_login_reg(){
 }
 //销毁session
 function session_d(){
-    session_destroy();
+    if (session_start()){
+        session_destroy();
+    }
 }
 //销毁cookie
 function cookie_d(){
@@ -207,7 +209,7 @@ function paging($paging_type){
              echo '<div id="page_text">';
                 echo '<ul>';
                         echo '<li>'.$_page.'/'.$_page_absolute.'页 |</li>';
-                        echo '<li>共有<strong>'.$total_num.'</strong>位会员 |</li>';
+                        echo '<li>共有<strong>'.$total_num.'</strong>条数据 |</li>';
                     if($_page==1){
                         //如果是首页，那么首页和上一页无效，不能点击
                         echo '<li>首页</li>';
