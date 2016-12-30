@@ -61,9 +61,10 @@ function block_login_reg(){
 }
 //销毁session
 function session_d(){
-    if (session_start()){
+   /* if (session_start()){
         session_destroy();
-    }
+    }*/
+   session_destroy();
 }
 //销毁cookie
 function cookie_d(){
