@@ -1,8 +1,7 @@
 <?php
-if(!isset($_SESSION))
-{
-    session_start();
-}
+
+session_start();
+
 //error输出
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
@@ -16,7 +15,29 @@ require dirname(__FILE__).'/includes/common.inc.php';
 if (!isset($_COOKIE['username'])){
     alert_back('please login,then try again');
 }
-#批量删除#
+//验证好友信息
+if (@$_GET['action']=='verify'&&isset($_GET['id'])){
+    if (!!$_rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")) {
+        //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
+        safe_uniquid($_rows['u_uniqid'], $_COOKIE['uniqid']);
+        //开始修改表里的f_state，从而通过验证
+        query("update bbs_friends set f_state=1 where f_id='{$_GET['id']}'");
+        if (affetched_rows()==1){
+            close();
+            session_d();
+            location('好友验证成功','member_friend.php');
+        }else{
+            close();
+            session_d();
+            alert_back('好友验证失败');
+        }
+
+
+    }else{
+        alert_back('非法登录');
+    }
+}
+#批量删除好友#
 if (@$_GET['action']=='delete'&&isset($_POST['id_chkbox'])){
 //print_r($_POST['id_chkbox']);
     $_clean=array();
@@ -26,12 +47,11 @@ if (@$_GET['action']=='delete'&&isset($_POST['id_chkbox'])){
         //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
         safe_uniquid($_rows['u_uniqid'], $_COOKIE['uniqid']);
         //开始批量删除
-        query("delete from bbs_message where m_id in({$_clear['id_chkbox']})");
+        query("delete from bbs_friends where f_id in({$_clear['id_chkbox']})");
         if (affetched_rows()){
             close();
             session_d();
-            echo '恭喜你，删除成功';
-            //location('删除成功','member_message.php');
+            location('好友删除成功','member_friend.php');
         }else{
             close();
             session_d();
@@ -97,16 +117,16 @@ require ROOT_PATH.'includes/header.inc.php';
                 if ($_html['touser']==$_COOKIE['username']){//登录的人是被别人加为好友，那么朋友是fromuser
                     $_html['friend']=$_html['fromuser'];
                     if (empty($_html['state'])){
-                        $_html['pass_state']='你未验证';
+                        $_html['pass_state']='<a href="?action=verify&id='.$_html['id'].'" style="color: red">你未验证</a>';
                     }else{
-                        $_html['pass_state']='通过验证';
+                        $_html['pass_state']='<span style="color:green">通过验证</span>';
                     }
                 }elseif ($_html['fromuser']==$_COOKIE['username']){//登录的人是加别人为好友，那么好友是touser
                     $_html['friend']=$_html['touser'];
                     if (empty($_html['state'])){
-                        $_html['pass_state']='对方未验证';
+                        $_html['pass_state']='<span style="color:blue">对方未验证</span>';
                     }else{
-                        $_html['pass_state']='通过验证';
+                        $_html['pass_state']='<span style="color:green">通过验证</span>';
                     }
                 }
 
