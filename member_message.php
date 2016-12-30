@@ -30,8 +30,7 @@ if (@$_GET['action']=='delete'&&isset($_POST['id_chkbox'])){
         if (affetched_rows()){
             close();
             session_d();
-            echo '恭喜你，删除成功';
-            //location('删除成功','member_message.php');
+            location('删除成功','member_message.php');
         }else{
             close();
             session_d();
