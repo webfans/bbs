@@ -56,12 +56,12 @@ if ($_GET['action']=='addfri'){
                 //清空session,腾出内存
                 session_d();
                 close();
-                alert_back_close('好友添加成功');
+                alert_back_close('好友请求发送成功');
             }
             else{
                 session_d();
                 close();
-                alert_back('好友添加失败');
+                alert_back('好友请求发送失败');
             }
         }
 
