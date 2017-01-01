@@ -14,6 +14,6 @@ if (!defined('IN_TG')){
     <dt>其它管理</dt>
     <dd><a href="member_message.php">短信查询</a> </dd>
     <dd><a href="member_friend.php">好友设置</a> </dd>
-    <dd><a href="###">查询花朵</a> </dd>
+    <dd><a href="member_flower.php">查询花朵</a> </dd>
     <dd><a href="###">人个相册</a> </dd>
 </dl>
