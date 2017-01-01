@@ -83,8 +83,9 @@ require ROOT_PATH.'includes/header.inc.php';
                 <th>操作</th>
             </tr>
             <?php
+            $_html = array();
             while(!!$rows=fetch_array_list($result)) {
-                $_html = array();
+
                 $_html['id'] = $rows['m_id'];
                 $_html['fromuser'] = $rows['m_fromuser'];
                 $_html['content'] = $rows['m_content'];
