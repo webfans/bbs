@@ -1,0 +1,41 @@
+body{
+    width: auto;
+}
+#flower h2{
+    text-align: center;
+}
+#flower dl{
+    width: 90%;
+    margin: 0 auto;/*水平剧中*/
+}
+#flower dl dd{
+    margin: 5px 0;
+}
+#flower dl dd input.text{
+    width: 180px;
+    height: 19px;
+    background: #fff;
+    border: 1px dashed #333
+}
+#flower dl dd input.yzm{
+    width: 60px;
+}
+#flower dl dd textarea{
+    width: 100%;
+    background: #fff;
+    height: 110px;
+    border: 1px dashed #333;
+    overflow-y: scroll;
+}
+#flower dl dd input.submit{
+    cursor: pointer;
+}
+#flower dl dd select{
+    width: 80px;
+    background: url("../../images/x4.gif") no-repeat left center;
+    padding-left: 10px;
+}
+/*为什么显示不出来*/
+#flower dl dd select option {
+    background: url("../../images/x4.gif") repeat;
+}
