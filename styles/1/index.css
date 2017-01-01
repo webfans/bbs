@@ -1,3 +1,4 @@
+
 #list{
     width:600px;
     height: 514px;
@@ -10,7 +11,67 @@
     border: 2px solid #ccc;
     float: left;
     margin: 0 0 10px 0;
+    font-size: 12px;
+
 }
+#user dl{
+    width: 150px;
+    text-align: center;/*不知道为什么不能居中*/
+    padding-left:95px;
+}
+#user dl dt{
+    width: 150px;
+    margin:0 0 5px 0;
+}
+#user dl dt img{
+    margin:0 auto;
+    display: block;
+}
+#user dl dd{
+    height: 20px;
+    line-height: 20px;
+    width: 75px;
+    float: left;
+
+}
+#user dl dd.user{
+    clear: both;
+    width: 150px;
+    color: #f60;
+}
+#user dl dd.message{
+    background: url("../../images/x1.gif") no-repeat 10% 35%;
+}
+#user dl dd a:hover{
+    cursor: pointer;
+}
+
+#user dl dd.friend{
+    background: url("../../images/x2.gif") no-repeat left center;
+}
+#user dl dd.guest{
+    background: url("../../images/x3.gif") no-repeat 10% 35%;
+}
+#user dl dd.flower{
+    background: url("../../images/x4.gif") no-repeat left center;
+}
+#user dl dd.email,#user dl dd.url{
+    width:150px;
+    text-align: left;
+    text-indent: 4px;
+    padding-top: 4px;
+}
+#user dl dd.email a,#user dl dd.url a{
+    text-decoration: none;
+    font-style: normal;
+    color: #333333;
+}
+#user dl dd.email a:hover,#user dl dd.url a:hover{
+    text-decoration: underline;
+}
+
+
+
 #pics{
     width:340px;
     height: 250px;
