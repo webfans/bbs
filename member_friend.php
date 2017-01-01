@@ -104,8 +104,9 @@ require ROOT_PATH.'includes/header.inc.php';
                 <th>操作</th>
             </tr>
             <?php
+            $_html = array();
             while(!!$rows=fetch_array_list($result)) {
-                $_html = array();
+
                 $_html['id'] = $rows['f_id'];
                 $_html['fromuser'] = $rows['f_fromuser'];
                 $_html['touser'] = $rows['f_touser'];
