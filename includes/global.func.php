@@ -71,7 +71,7 @@ function cookie_d(){
     setcookie('username','',time()-1);
     setcookie('uniqid','',time()-1);
     session_d();
-    location('null','index.php');
+    location('','index.php');
 }
 //生成验证码
 /*
@@ -258,5 +258,63 @@ function summary($str){
         $str=mb_substr($str,1,14,'utf-8').'...';
     }
     return $str;
+}
+//读取XML
+function get_xml($xmlfile){
+    if (file_exists($xmlfile)){
+        $xml_content=file_get_contents($xmlfile);
+        //第一次过滤筛选
+        preg_match_all('/<vip>(.*)<\/vip>/s',$xml_content,$_dom);
+        //print_r($_dom);
+        //再次筛选
+        foreach ($_dom[1] as $value){
+            preg_match_all('/<id>(.*)<\/id>/s',$value,$_id);
+            //print_r($_id);//二维数组
+            preg_match_all('/<username>(.*)<\/username>/s',$value,$_username);
+            preg_match_all('/<sex>(.*)<\/sex>/s',$value,$_sex);
+            preg_match_all('/<face>(.*)<\/face>/s',$value,$_face);
+            preg_match_all('/<email>(.*)<\/email>/s',$value,$_email);
+            preg_match_all('/<url>(.*)<\/url>/s',$value,$_url);
+            $_html['id']=$_id[1][0];
+            $_html['username']=$_username[1][0];
+            $_html['sex']=$_sex[1][0];
+            $_html['face']=$_face[1][0];
+            $_html['email']=$_email[1][0];
+            $_html['url']=$_url[1][0];
+
+        }
+    }else{
+        echo 'file is not Exist';
+    }
+    return $_html;
+}
+//生成 XML
+function set_xml($xmlfile,$clean){
+    $fp=fopen($xmlfile,'w');
+    if (!$fp){
+        exit('系统错误，文件不存在');
+    }
+    flock($fp,LOCK_EX);//锁定
+    $string="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n";
+    fwrite($fp,$string,strlen($string));
+    $string="<vip>\r\n";
+    fwrite($fp,$string,strlen($string));
+    $string="\t<id>{$clean['id']}</id>\r\n";
+    fwrite($fp,$string,strlen($string));
+    $string="\t<username>{$clean['username']}</username>\r\n";
+    fwrite($fp,$string,strlen($string));
+    $string="\t<sex>{$clean['sex']}</sex>\r\n";
+    fwrite($fp,$string,strlen($string));
+    $string="\t<face>{$clean['face']}</face>\r\n";
+    fwrite($fp,$string,strlen($string));
+    $string="\t<email>{$clean['email']}</email>\r\n";
+    fwrite($fp,$string,strlen($string));
+    $string="\t<url>{$clean['url']}</url>\r\n";
+    fwrite($fp,$string,strlen($string));
+    $string="</vip>\r\n";
+    fwrite($fp,$string,strlen($string));
+    flock($fp,LOCK_UN);//解锁
+    fclose($fp);
+
 }
 
