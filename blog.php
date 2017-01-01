@@ -46,8 +46,9 @@ require ROOT_PATH.'includes/header.inc.php';
     <!--while(!!rows=mysql_fetch_array($result)),是没问题的-->
     <!--我们必须是每次重新读取结果集，而不是每次重新执行一次SQL,而上边的fetch_array($sql)就是重复执行SQl导致死循环-->
     <?php
+        $_html=array();
         while(!!$rows=fetch_array_list($result)){
-            $_html=array();
+
             $_html['id']=$rows['u_id'];
             $_html['username']=$rows['u_username'];
             $_html['face']=$rows['u_face'];
@@ -62,16 +63,17 @@ require ROOT_PATH.'includes/header.inc.php';
         <dd class="message"><a name="message" title="<?php echo $_html['id']?>">发消息</a></dd>
         <dd class="friend"><a name="friend" title="<?php echo $_html['id']?>">加好友</a></dd>
         <dd class="guest">写留言</dd>
-        <dd class="flower">给他送花</dd>
+        <dd class="flower"><a name="flower" title="<?php echo $_html['id']?>">给他送花</a></dd>
     </dl>
     <?php } ?>
-<?php
-//销毁数据集
-mysql_free_result($result);
-//调用分页函数
-paging(1);
-paging('num');
-?>
+
+    <?php
+    //销毁数据集
+    mysql_free_result($result);
+    //调用分页函数
+    paging(1);
+    paging('num');
+    ?>
 
 </div>
 
