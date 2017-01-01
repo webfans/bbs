@@ -80,12 +80,16 @@ if (@$_GET['action']=='register'){
    //mysql_query("insert into bbs_user(u_question,u_face) values('{$clean['question']}','{$clean['face']}')") or
    //die('sql执行错误'.mysql_error());
     if (affetched_rows()==1){
+        //获取刚刚新增的ID
+        $clean['id']=mysql_insert_id();
         //跳转到激活页
-        //location('恭喜你注册成功','active.php?action=ok&active='.$clean['active']);//加上OK不用点击，直接激动不知道为什么？
+        //location('恭喜你注册成功','active.php?action=ok&active='.$clean['active']);//加上OK不用点击，直接激活不知道为什么？
         location('恭喜你注册成功','active.php?active='.$clean['active']);
         //清空session,腾出内存
         session_d();
         close();
+        //生成用户信息XML
+        set_xml('userinfo.xml',$clean);
     }
     else{
         location('注册失败','register.php');
