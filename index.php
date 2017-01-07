@@ -1,7 +1,7 @@
 <?php
 //error输出
-//error_reporting(E_ALL);
-//ini_set('display_errors', '1');
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 //指定一个常量 用来授权能不能调用文件
 define('IN_TG',true);
 //定义一个常量 用来指定本页的内容
@@ -29,6 +29,15 @@ require ROOT_PATH.'includes/header.inc.php';
 ?>
 <div id="list">
     <h2>帖子列表</h2>
+    <a href="post.php" class="post">发表文章</a>
+    <ul class="article">
+        <li class="icon1"><em>阅读数(<strong>180</strong>) 评论数(<strong>280</strong>)</em><a href="###"> 创富时代来了：互联网创富时代来临</a></li>
+        <li class="icon1"><em>阅读数(<strong>180</strong>) 评论数(<strong>280</strong>)</em><a href="###"> 创富时代来了：互联网创富时代来临</a></li>
+        <li class="icon1"><em>阅读数(<strong>180</strong>) 评论数(<strong>280</strong>)</em><a href="###"> 创富时代来了：互联网创富时代来临</a></li>
+        <li class="icon1"><em>阅读数(<strong>180</strong>) 评论数(<strong>280</strong>)</em><a href="###"> 创富时代来了：互联网创富时代来临</a></li>
+        <li class="icon1"><em>阅读数(<strong>180</strong>) 评论数(<strong>280</strong>)</em><a href="###"> 创富时代来了：互联网创富时代来临</a></li>
+
+    </ul>
 </div>
 <div id="user">
     <h2>新进会员</h2>
@@ -38,7 +47,7 @@ require ROOT_PATH.'includes/header.inc.php';
         <dd class="message"><a name="message" title="<?php echo $_html['id']?>">发消息</a></dd>
         <dd class="friend"><a name="friend" title="<?php echo $_html['id']?>">加好友</a></dd>
         <dd class="guest">写留言</dd>
-        <dd class="flower"><a name="flower">">给他送花</a></dd>
+        <dd class="flower"><a name="flower">"给他送花</a></dd>
         <dd class="email"><a href="mailto:<?php echo $_html['email'];?>">邮件:<?php echo $_html['email'];?></a></dd>
         <dd class="url"><a href="<?php echo $_html['url'];?>" target="_blank">网址:<?php echo $_html['url'];?></a></dd>
     </dl>
