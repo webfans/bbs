@@ -186,12 +186,13 @@ function paging_fault_tolerant($sql,$size){
     }
 }
 //分页函数
+//$pageing_type=1 数字分布 2：文本分页 3：同时两效果
 function paging($paging_type){
     //这里把这几个变量声明为全局变量，这样才能用blog.php页面在该函数声明的变量的值
     //另外一种访问函数外变量的值，就是直接参数传递
     global $_page,$_page_absolute,$total_num;
     #1数字分页模式 
-    if ($paging_type=='text'||$paging_type==1){
+    if ($paging_type=='num'||$paging_type==1){
          echo '<div id="page_num">';
             echo '<ul>';
                 for ($i=0;$i<$_page_absolute;$i++){
@@ -205,8 +206,9 @@ function paging($paging_type){
                 }
             echo '</ul>';
         echo '</div>';
-        ##2文本分页模式
-    } elseif ($paging_type=='num'||$paging_type==2){
+
+    }##2文本分页模式
+    elseif ($paging_type=='text'||$paging_type==2){
              echo '<div id="page_text">';
                 echo '<ul>';
                         echo '<li>'.$_page.'/'.$_page_absolute.'页 |</li>';
@@ -230,8 +232,12 @@ function paging($paging_type){
                     }
                 echo '</ul>';
             echo '</div>';
-        }
+        }else{
+        //同时支持两种分布模式
+           paging(1);
+           paging(2);
     }
+}
 
 //转义HTML特殊字符
 //如果是数组按数组的方式过滤，如果是字符串则按字符串方式过渡
@@ -253,9 +259,9 @@ function safe_uniquid($mysql_uniquid,$cookie_uniqid){
     }
 }
 //长文本以摘要的形式显示
-function summary($str){
-    if (mb_strlen($str,'utf-8')>14){
-        $str=mb_substr($str,1,14,'utf-8').'...';
+function summary($str,$length=14){
+    if (mb_strlen($str,'utf-8')>$length){
+        $str=mb_substr($str,0,$length,'utf-8').'...';
     }
     return $str;
 }
@@ -316,5 +322,22 @@ function set_xml($xmlfile,$clean){
     flock($fp,LOCK_UN);//解锁
     fclose($fp);
 
+}
+//ubb
+function ubb($content){
+    //nl2br 将回车形式的换行/n,转换成网页代码形式的换行</br>
+    $content=nl2br($content);
+    $content=preg_replace('/\[b\](.*)\[\/b\]/U','<strong>\1</strong>',$content);
+    $content=preg_replace('/\[size=(.*)\](.*)\[\/size\]/U','<span style="font-size:\1px">\2</span>',$content);
+    $content=preg_replace('/\[i\](.*)\[\/i\]/U','<em>\1</em>',$content);
+    $content=preg_replace('/\[u\](.*)\[\/u\]/U','<span style="text-decoration:underline">\1</span>',$content);
+    $content=preg_replace('/\[s\](.*)\[\/s\]/U','<span style="text-decoration:line-through">\1</span>',$content);
+    $content=preg_replace('/\[color=(.*)\](.*)\[\/color\]/U','<span style="color:\1">\2</span>',$content);
+    $content=preg_replace('/\[url\](.*)\[\/url\]/U','<a href="\1" target="_blank">\1</a>',$content);
+    $content=preg_replace('/\[email\](.*)\[\/email\]/U','<a href="mailto:">\1</a>',$content);
+    $content=preg_replace('/\[img\](.*)\[\/img\]/U','<img src="\1" alt="Pic">',$content);
+    $content=preg_replace('/\[flash\](.*)\[\/flash\]/U','<embed src="\1" style="width:480px;height:400px" alt="flash">',$content);
+
+    return $content;
 }
 
