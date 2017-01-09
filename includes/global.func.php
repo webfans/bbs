@@ -151,7 +151,7 @@ function paging_fault_tolerant($sql,$size){
     
     if (isset($_GET['page'])){
         $_page=@$_GET['page'];
-        if (empty($_page)||$_page<0||!is_numeric($_page)){
+        if (empty($_page)||$_page<=0||!is_numeric($_page)){
             //防止page存在，但是空值（0）或是负值或不是数字
             $_page=1;
         }else{
@@ -190,7 +190,8 @@ function paging_fault_tolerant($sql,$size){
 function paging($paging_type){
     //这里把这几个变量声明为全局变量，这样才能用blog.php页面在该函数声明的变量的值
     //另外一种访问函数外变量的值，就是直接参数传递
-    global $_page,$_page_absolute,$total_num;
+    //$_id 专门用于 回贴分页
+    global $_page,$_page_absolute,$total_num,$_id;
     #1数字分页模式 
     if ($paging_type=='num'||$paging_type==1){
          echo '<div id="page_num">';
@@ -198,10 +199,10 @@ function paging($paging_type){
                 for ($i=0;$i<$_page_absolute;$i++){
                     if ($_page==($i+1)){
                     	 //加上当前页选中状态的样式
-                        echo '<li><a class="selected" href="'.SCRIPT.'.php?page='.($i+1).'">'.($i+1).'</a> </li>';
+                        echo '<li><a class="selected" href="'.SCRIPT.'.php?'.$_id.'page='.($i+1).'">'.($i+1).'</a> </li>';
                     }
                     else{
-                        echo '<li><a href="'.SCRIPT.'.php?page='.($i+1).'">'.($i+1).'</a> </li>';
+                        echo '<li><a href="'.SCRIPT.'.php?'.$_id.'page='.($i+1).'">'.($i+1).'</a> </li>';
                     }
                 }
             echo '</ul>';
@@ -220,15 +221,15 @@ function paging($paging_type){
                     }else{
                         //echo '<li><a href="'.$_SERVER[SCRIPT_NAME].'.php">首页</a> </li>';
                         echo '<li><a href="'.SCRIPT.'.php">首页</a> </li>';
-                        echo '<li><a href="'.SCRIPT.'.php?page='.($_page-1).'">上一页</a> </li>';
+                        echo '<li><a href="'.SCRIPT.'.php?'.$_id.'page='.($_page-1).'">上一页</a> </li>';
                     }
                     if ($_page==$_page_absolute){
                         //如果是尾页，则尾页和下一页无效，不能点击
                         echo '<li>下一页</li>';
                         echo '<li>尾页</li>';
                     }else{
-                        echo '<li><a href="'.SCRIPT.'.php?page='.($_page+1).'">下一页</a> </li>';
-                        echo '<li><a href="'.SCRIPT.'.php?page='.$_page_absolute.'">尾页</a> </li>';
+                        echo '<li><a href="'.SCRIPT.'.php?'.$_id.'page='.($_page+1).'">下一页</a> </li>';
+                        echo '<li><a href="'.SCRIPT.'.php?'.$_id.'page='.$_page_absolute.'">尾页</a> </li>';
                     }
                 echo '</ul>';
             echo '</div>';
