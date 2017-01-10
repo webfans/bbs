@@ -19,7 +19,7 @@ require dirname(__FILE__).'/includes/common.inc.php';
 //分布模块 分页容错处理
 global $_pagenum,$_pagesize;
 $sql="select u_id from bbs_user";
-paging_fault_tolerant($sql,4);
+paging_fault_tolerant($sql,15);
 
 //从数据库读取数据
 $sql="select u_id,u_username,u_sex,u_face from bbs_user ORDER BY u_regtime DESC LIMIT $_pagenum,$_pagesize";
@@ -72,7 +72,7 @@ require ROOT_PATH.'includes/header.inc.php';
     mysql_free_result($result);
     //调用分页函数
     paging(1);
-    paging('num');
+    paging(2);
     ?>
 
 </div>
