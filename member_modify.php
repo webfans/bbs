@@ -88,10 +88,10 @@ if (isset($_COOKIE['username'])){
         //！注意：这里必须是【.=】,即追加模式
         $html['face_html']='<select name="face">';
             foreach (range(1,9) as $num){
-                $html['face_html'].='<option value=images/face/m0'.$num.'.gif>m0'.$num.'.gif</option>';
+                $html['face_html'].='<option value="images/face/m0'.$num.'.gif">m0'.$num.'.gif</option>';
             }
             foreach (range(10,64) as $num){
-                $html['face_html'].='<option value=images/face/m'.$num.'.gif>m'.$num.'.gif</option>';
+                $html['face_html'].='<option value="images/face/m'.$num.'.gif">m'.$num.'.gif</option>';
             }
         $html['face_html'].='</select>';
         //会员级别
