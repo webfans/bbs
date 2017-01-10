@@ -107,9 +107,6 @@ if (@$_GET['action']=='post'){
                 <input type="submit" name="submit" class="submit" value="发送文章">
             </dd>
 
-
-
-
         </dl>
     </form>
 </div>
