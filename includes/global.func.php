@@ -208,7 +208,8 @@ function paging($paging_type){
             echo '</ul>';
         echo '</div>';
 
-    }##2文本分页模式
+    }
+    ##2文本分页模式
     elseif ($paging_type=='text'||$paging_type==2){
              echo '<div id="page_text">';
                 echo '<ul>';
