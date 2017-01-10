@@ -14,7 +14,7 @@ require dirname(__FILE__).'/includes/common.inc.php';
 }*/
 if (isset($_GET['action']) && isset($_GET['active']) && $_GET['action']=='ok'){
     $active=mysql_string($_GET['active']);
-    echo $active;
+    //echo $active;
     $sql="select u_active from bbs_user WHERE u_active='$active' LIMIT 1";
     if (fetch_array($sql)) {
         //将u_active设置为空
