@@ -154,3 +154,15 @@ function check_content($content,$min_num,$max_num){
    }
    return $content;
 }
+function check_article_title($title,$min_num,$max_num){
+    if( mb_strlen($title,'utf-8')<$min_num||mb_strlen($title,'utf-8')>$max_num){
+        alert_back('帖子标题不能小于'.$min_num.'位或大于'.$max_num.'位');
+    }
+    return $title;
+}
+function check_article_content($content,$min_num,$max_num){
+    if( mb_strlen($content,'utf-8')<$min_num||mb_strlen($content,'utf-8')>$max_num){
+        alert_back('帖子内容不能小于'.$min_num.'位或大于'.$max_num.'位');
+    }
+    return $content;
+}
