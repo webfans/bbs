@@ -166,3 +166,9 @@ function check_article_content($content,$min_num,$max_num){
     }
     return $content;
 }
+function check_autograph($content,$max_num){
+    if(mb_strlen($content,'utf-8')>$max_num){
+        alert_back('个性签名不能大于'.$max_num.'位');
+    }
+    return $content;
+}
