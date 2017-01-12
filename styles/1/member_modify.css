@@ -1,12 +1,12 @@
 #member {
     width:auto;
-    height: 600px;
+    height: 650px;
     border: 2px solid #ccc;
     font-size: 12px;
 }
 #member #member_sidebar{
     width: 300px;
-    height: 500px;
+    height: 530px;
     border: 1px dashed #999;
     margin: 15px;
     float: left;
@@ -48,7 +48,7 @@
 }
 #member #member_main{
     width: 590px;
-    height: 500px;
+    height: auto;
     border: 1px dashed #999;
     margin: 15px;
     float: right;
@@ -62,6 +62,12 @@
     border-bottom: 1px dashed #999;
     padding: 10px 0;
 
+}
+#member #member_main dl dd p{
+    padding: 5px 0 0 70px;
+}
+#member #member_main dl dd p textarea{
+    border: 1px dashed #999;
 }
 #member_main dl dd input.text{
     width: 220px;
