@@ -1,10 +1,70 @@
-
+﻿
 #list{
     width:600px;
     height: 514px;
     border: 2px solid #ccc;
     float: right;
 }
+#list a.post{
+    display: block;
+    width: 113px;
+    height: 33px;
+    text-indent: -9999px;
+    background: url("../../images/aricle.jpg") no-repeat left center;
+    margin: 10px 10px 0 auto;
+}
+#list ul.article{
+    padding: 10px 50px;
+}
+#list ul.article li{
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px dashed #333;
+}
+#list ul li em{
+    font-style: normal;
+    float: right;
+}
+#list ul li a{
+    text-decoration: none;
+    color: #333;
+}
+#list ul li a:hover{
+    color:#F60;
+}
+#list ul li.icon0{
+    background: url("../../images/icon0.gif") no-repeat 2px 30%;
+    padding-left:25px ;
+}
+#list ul li.icon1{
+    background: url("../../images/icon1.gif") no-repeat left center;
+    padding-left:20px ;
+}
+#list ul li.icon2{
+    background: url("../../images/icon2.gif") no-repeat left center;
+    padding-left:20px ;
+}
+#list ul li.icon3{
+    background: url("../../images/icon3.gif") no-repeat left center;
+    padding-left:20px ;
+}
+#list ul li.icon4{
+    background: url("../../images/icon4.gif") no-repeat left center;
+    padding-left:20px ;
+}
+#list ul li.icon5{
+    background: url("../../images/icon5.gif") no-repeat left center;
+    padding-left:20px ;
+}
+#list ul li.icon6{
+    background: url("../../images/icon6.gif") no-repeat left center;
+    padding-left:20px ;
+}
+#list ul li.icon7{
+    background: url("../../images/icon7.gif") no-repeat left center;
+    padding-left:20px ;
+}
+
 #user{
     width:340px;
     height: 250px;
@@ -15,9 +75,9 @@
 
 }
 #user dl{
-    width: 150px;
+    width: 180px;
     text-align: center;/*不知道为什么不能居中*/
-    padding-left:95px;
+    padding-left:80px;
 }
 #user dl dt{
     width: 150px;
@@ -32,7 +92,6 @@
     line-height: 20px;
     width: 75px;
     float: left;
-
 }
 #user dl dd.user{
     clear: both;
@@ -56,7 +115,7 @@
     background: url("../../images/x4.gif") no-repeat left center;
 }
 #user dl dd.email,#user dl dd.url{
-    width:150px;
+    width:180px;
     text-align: left;
     text-indent: 4px;
     padding-top: 4px;
