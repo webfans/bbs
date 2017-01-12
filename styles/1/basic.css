@@ -16,6 +16,7 @@ h2{
     height: 25px;
     line-height: 25px;
     text-indent: 10px;
+    text-align: left;
 }
 
 #header{
@@ -114,6 +115,7 @@ h2{
     clear: both;
     padding: 10px 0;
     height: 20px;
+
 }
 #page_text ul{
     text-align: center;
@@ -121,7 +123,6 @@ h2{
 #page_text ul li{
     display: inline;
     padding-left: 10px;
-
 }
 #page_text ul li a{
     color: #333;
