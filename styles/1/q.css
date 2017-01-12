@@ -1,0 +1,29 @@
+body{
+    width: auto;
+}
+#q h3{
+    width: 80%;
+    margin: 10px auto;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px dashed #333;
+    font-size: 12px;
+
+}
+#q dl{
+    width: 80%;
+    margin: 0 auto;/*水平剧中*/
+}
+#q dl dd{
+    float: left;
+    width: 102px;
+    text-align: center;
+}
+#q dl dd img{
+    cursor: pointer;
+}
+#q dl dd img:hover{
+    cursor:pointer;
+    border: 1px dashed #000;
+}
