@@ -9,7 +9,7 @@ define('IN_TG',true);
 define('SCRIPT','member_modify');
 //引入公共文件
 require dirname(__FILE__).'/includes/common.inc.php';
-
+//#修改用户信息#
 if (@$_GET['action']=='modify'){
     include ROOT_PATH.'includes/check.func.php';
     //验证码
@@ -27,10 +27,22 @@ if (@$_GET['action']=='modify'){
         $clean['email']=check_emial($_POST['email'],6,30);
         $clean['qq']=check_qq($_POST['qq']);
         $clean['url']=check_url($_POST['url'],40);
+        $clean['switch']=$_POST['switch'];
+        $clean['autograph']=check_autograph($_POST['autograph'],200);
         //print_r($clean);
         //开始修改资料
         if (empty($clean['password'])){
             //如果密码为空
+            query("UPDATE bbs_user SET 
+                                     u_sex='{$clean['sex']}',
+                                     u_face='{$clean['face']}',
+                                     u_email='{$clean['email']}',
+                                     u_qq='{$clean['qq']}',
+                                     u_url='{$clean['url']}',
+                                     u_switch='{$clean['switch']}',
+                                     u_autograph='{$clean['autograph']}'
+                              WHERE u_username='{$_COOKIE['username']}'  
+              ");
         }else{
             query("UPDATE bbs_user SET 
                                      u_password='{$clean['password']}',
@@ -38,7 +50,9 @@ if (@$_GET['action']=='modify'){
                                      u_face='{$clean['face']}',
                                      u_email='{$clean['email']}',
                                      u_qq='{$clean['qq']}',
-                                     u_url='{$clean['url']}'
+                                     u_url='{$clean['url']}',
+                                     u_switch='{$clean['switch']}',
+                                     u_autograp='{$clean['autograph']}',
                               WHERE u_username='{$_COOKIE['username']}'  
               ");
         }
@@ -59,10 +73,11 @@ if (@$_GET['action']=='modify'){
 
 
 }
+//#显示用户信息#
 //是否正常登录
 if (isset($_COOKIE['username'])){
     //获取数据集
-    $sql="select u_username,u_sex,u_face,u_email,u_url,u_qq,u_regtime,u_level from bbs_user where u_username='{$_COOKIE['username']}'";;
+    $sql="select * from bbs_user where u_username='{$_COOKIE['username']}'";;
     $rows=fetch_array($sql);
     //如果有数据，,或者数据库没有此用户，伪造用户cookie
     if ($rows){
@@ -75,6 +90,8 @@ if (isset($_COOKIE['username'])){
        $html['url']=$rows['u_url'];
        $html['qq']=$rows['u_qq'];
        $html['regtime']=$rows['u_regtime'];
+       $html['switch']=$rows['u_switch'];
+       $html['autograph']=$rows['u_autograph'];
 
        //一次性转义数组，也可以分别每一行
        $html=html_spec($html);
@@ -105,6 +122,13 @@ if (isset($_COOKIE['username'])){
            default:
                $html['level']='Guest';
        }
+       //签名开关
+        if ($html['switch']==0){
+           $html['switch_html']='<input type="radio" name="switch" value="1">启用  <input type="radio" name="switch" value="0" checked>关闭';
+        }else{
+            $html['switch_html']='<input type="radio" name="switch" value="1" checked>启用  <input type="radio" name="switch" value="0">关闭';
+        }
+
     }else{
         alert_back('此用户不存在');
     }
@@ -146,6 +170,10 @@ require ROOT_PATH.'includes/header.inc.php';
                 <dd>主&emsp;&emsp;页：<input type="text" name="url" value="<?php echo $html['url'];?>" /></dd>
                 <dd>Q&emsp;&emsp;&emsp;Q:<input type="text" name="qq" value="<?php echo $html['qq'];?>" /></dd>
                 <dd>身&emsp;&emsp;份：<?php echo $html['level'];?></dd>
+                <dd>
+                    个性签名：<?php echo $html['switch_html'];?>&nbsp;(支持UBB)
+                    <p><textarea name="autograph" rows="3" cols="25"><?php echo $html['autograph']?></textarea></p>
+                </dd>
                 <dd>验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/> </dd>
                 <dd><input type="submit" name="submit" class="submit" value="修改资料"> </dd>
             </dl>
