@@ -10,7 +10,7 @@ define('SCRIPT','member');
 require dirname(__FILE__).'/includes/common.inc.php';
 if (isset($_COOKIE['username'])){
     //获取数据集
-    $sql="select u_username,u_sex,u_face,u_email,u_url,u_qq,u_regtime,u_level from bbs_user where u_username='{$_COOKIE['username']}'";;
+    $sql="select * from bbs_user where u_username='{$_COOKIE['username']}'";;
     $rows=fetch_array($sql);
     //如果有数据，,或者数据库没有此用户，伪造用户cookie
     if (!!$rows){
@@ -22,6 +22,7 @@ if (isset($_COOKIE['username'])){
        $html['email']=$rows['u_email'];
        $html['url']=$rows['u_url'];
        $html['qq']=$rows['u_qq'];
+       $html['autograph']=$rows['u_autograph'];
        $html['regtime']=$rows['u_regtime'];
        //一次性转义数组，也可以分别每一行
        $html=html_spec($html);
@@ -68,6 +69,7 @@ require ROOT_PATH.'includes/header.inc.php';
             <dd>电子邮件：<?php echo $html['email'];?></dd>
             <dd>主&emsp;&emsp;页：<?php echo $html['url'];?></dd>
             <dd>Q&emsp;&emsp;&emsp;Q:<?php echo $html['qq'];?></dd>
+            <dd>个性签名:<?php echo $html['autograph'];?></dd>
             <dd>注册时间：<?php echo $html['regtime'];?></dd>
             <dd>身&emsp;&emsp;份：<?php echo $html['level'];?></dd>
         </dl>
