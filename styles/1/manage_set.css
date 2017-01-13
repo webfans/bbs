@@ -1,0 +1,27 @@
+
+#member #member_main dl{
+     width: 500px;
+     margin:15px auto;
+     font-size:14px;
+ }
+#member #member_main dl dd{
+    border-bottom: 1px dashed #999;
+    padding: 10px 0;
+}#member #member_main dl dd input.text{
+    width: 180px;
+    height: 19px;
+    background: #fff;
+    border: 1px dashed #333;
+ }
+#member #member_main dl dd input.submit{
+    width: 85px;
+    height: 20px;
+    background: #fff;
+    border: 1px dashed #333;
+    cursor: pointer;
+    margin-left: 120px;
+ }
+#member #member_main  dl dd input.submit:hover{
+    background: #0066FF;
+    color: #fff;
+}

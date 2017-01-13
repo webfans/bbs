@@ -32,6 +32,9 @@ h2{
 #header ul li{
     display: inline;
 }
+#header ul li a.admin{
+    color: red;
+}
 #header ul li strong.read{
     background: url("../../images/read.gif") no-repeat left center;
 }
@@ -178,7 +181,7 @@ h2{
 }
 #member #member_main{
     width: 590px;
-    height: 550px;
+    height: 580px;
     border: 1px dashed #999;
     margin: 15px;
     float: right;

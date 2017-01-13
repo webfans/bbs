@@ -22,7 +22,7 @@ if (@$_GET['action']=='login'){
     $clean['time']=check_time($_POST['time']);
     //print_r($clean);
     //从数据库调取数据开始比对
-    $sql="select u_username,u_uniqid from bbs_user WHERE u_username='{$clean['username']}'AND u_password='{$clean['password']}' AND u_active='' limit 1";
+    $sql="select u_username,u_uniqid,u_level from bbs_user WHERE u_username='{$clean['username']}'AND u_password='{$clean['password']}' AND u_active='' limit 1";
     if (!!$rows=fetch_array($sql)){
         //登录成功后写入cookie,并记录IP,登录时间和次数
         query("UPDATE bbs_user SET
@@ -34,9 +34,12 @@ if (@$_GET['action']=='login'){
                               ");
 
         setlogincookies($rows['u_username'],$rows['u_uniqid'],$clean['time']);
+        if ($rows['u_level']==1){
+            $_SESSION['admin']=$rows['u_username'];
+        }
         location('登录成功','member.php');
         close();
-        session_d();
+        // //session_d();
     }
     else{
         session_destroy();
