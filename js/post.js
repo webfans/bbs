@@ -6,12 +6,27 @@ window.onload=function () {
     var ubb=document.getElementById('ubb');
     var ubbimg=ubb.getElementsByTagName('img');
     var fm=document.getElementsByTagName('form')[0];
+    fm.onsubmit=function () {
+        if(fm.title.value.length<5||fm.title.value.length>40){
+            alert('标题不能小于5位或大于40位');
+            fm.title.value='';//清空
+            fm.title.focus();//将光标移到该字段
+            return false;
+        }
+        if(fm.content.value.length<10||fm.content.value.length>10000){
+            alert('内容不能小于15位或大于10000位');
+            fm.content.value='';//清空
+            fm.content.focus();//将光标移到该字段
+            return false;
+        }
+    }
     var fonts=document.getElementById('font');
     var color=document.getElementById('color');
     var htmls=document.getElementsByTagName('html')[0];
 
     var q=document.getElementById('q');
     var qa=q.getElementsByTagName('a');
+
     qa[0].onclick=function () {
         window.open('q.php?num=48&path=images/qpic/1/','qpic','width=400,height=400,scrollbars=1');
     }
@@ -53,7 +68,7 @@ window.onload=function () {
     ubbimg[8].onclick=function () {
         var url=prompt('请输入网址：','http://');
         if(url){
-            if(!/^https?:\/\/(\w+\.)?[\w\-\.]+(\.\w+)+$/.test(url)){
+            if(/^https?:\/\/(\w+\.)?[\w\-\.]+(\.\w+)+/.test(url)){
                 contents('[url]'+url+'[/url]');
             }else {
                 alert('网址不合法');
@@ -65,7 +80,7 @@ window.onload=function () {
         var email=prompt('请输入网址：','@');
         if(email){
             if(/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/.test(email)){
-                contents('[url]'+email+'[/url]');
+                contents('[email]'+email+'[/emial]');
             }else {
                 alert('电子邮件不合法');
             }
@@ -75,14 +90,14 @@ window.onload=function () {
     ubbimg[10].onclick=function () {
         var image=prompt('请输入网址：','http://');
         if(image){
-            contents('[url]'+image+'[/url]');
+            contents('[img]'+image+'[/img]');
         }
     };
     ubbimg[11].onclick=function () {
         var flash=prompt('请输入网址：','http://');
         if(flash){
-            if(!/^https?:\/\/(\w+\.)?[\w\-\.]+(\.\w+)+$/.test(flash)){
-                contents('[url]'+flash+'[/url]');
+            if(/^https?:\/\/(\w+\.)?[\w\-\.]+(\.\w+)+/.test(flash)){
+                contents('[flash]'+flash+'[/flash]');
             }else {
                 alert('视频网址不合法');
             }

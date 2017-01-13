@@ -4,7 +4,9 @@
 
 function vcode() {
     var vcode=document.getElementById('vcode');
-    vcode.onclick=function () {
-        this.src='vcode.php?tm'+Math.random();
-    };
+    if (vcode!=null){
+        vcode.onclick=function () {
+            this.src='vcode.php?tm'+Math.random();
+        };
+    }
 }

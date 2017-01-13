@@ -11,6 +11,6 @@ window.onload=function () {
 
 };
 //改变父窗口texearea的值
-function _opener(son_src){
-    opener.document.getElementsByTagName('form')[0].content.value+='[img]'+son_src+'[/img]'
+function _opener(son_alt){
+    opener.document.getElementsByTagName('form')[0].content.value+='[img]'+son_alt+'[/img]'
 }
