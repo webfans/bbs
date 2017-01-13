@@ -29,11 +29,11 @@ if (@$_GET['action']=='delete'&&isset($_POST['id_chkbox'])){
         query("delete from bbs_flower where fl_id in({$_clear['id_chkbox']})");
         if (affetched_rows()){
             close();
-            session_d();
+             //session_d();
             location('花朵删除成功','member_flower.php');
         }else{
             close();
-            session_d();
+             //session_d();
             alert_back('花朵删除失败');
         }
     }else{

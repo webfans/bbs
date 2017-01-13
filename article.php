@@ -17,8 +17,11 @@ if ($_GET['action']=='RE'){
     //1.验证码验证
     //check_vcode($_POST['vcode'],$_SESSION['vcode']);
     //2.对比唯一标识符
-    if (!!$row=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")){
+    if (!!$row=fetch_array("select u_uniqid,u_replytime from bbs_user where u_username='{$_COOKIE['username']}'")){
         safe_uniquid($row['u_niqid'],$_SESSION['uniqid']);
+        //限制频繁跟帖
+        //post_checktime(time(),$_COOKIE['first_replytime'],30);
+        post_checktime(time(),$row['u_replytime'],20);
         //接受跟贴表单数据
         $clean=array();
         $clean['reid']=$_POST['reid'];
@@ -46,18 +49,20 @@ if ($_GET['action']=='RE'){
                                       )"
              );
         if (affetched_rows()==1){
-            //获取刚刚新增的ID
-            //$clean['id']=mysql_insert_id();
+            //第一次回帖成功后，#1写入cookie #2或者写入数据库
+            //setcookie('firt_replytime',time());
+            $clean['replytime']=time();
+            query("update bbs_user set u_replytime='{$clean['replytime']}' WHERE u_username='{$_COOKIE['username']}'");
             //每成功增加一条回复帖子，评论数自增1
             query("UPDATE bbs_article SET art_comment=art_comment+1 where art_reid=0 and art_id='{$clean['reid']}'");
             location('回贴成功','article.php?id='.$clean['reid']);
             //清空session,腾出内存
-            session_d();
+             //session_d();
             close();
         }
         else{
             alert_back('回贴失败');
-            session_d();
+             //session_d();
             close();
         }
     }else{
@@ -112,7 +117,7 @@ if (isset($_GET['id'])){
             }
             //个性签名
             if ($_html['switch']==1){
-                $_html['autograph_html']=' <p class="autograph"><span>个性签名:</span>'.$_html['autograph'].'</p>';
+                $_html['autograph_html']=' <p class="autograph"><span></span>'.ubb($_html['autograph']).'</p>';
             }
 
            //#2.读取跟帖信息#

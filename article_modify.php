@@ -49,11 +49,11 @@ if ($_GET['action']=='modify'){
             $clean['id']=$role['art_reid'];
         }
         location('帖子修改成功','article.php?id='.$clean['id']);
-        session_d();
+         //session_d();
         close();
     }else{
         alert_back('帖子修改失败');
-        session_d();
+         //session_d();
         close();
     }
 }

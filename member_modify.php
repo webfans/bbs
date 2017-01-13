@@ -61,12 +61,12 @@ if (@$_GET['action']=='modify'){
             //location('恭喜你注册成功','active.php?action=ok&active='.$clean['active']);//加上OK不用点击，直接激动不知道为什么？
             location('恭喜你修改成功','member.php');
             //清空session,腾出内存
-            session_d();
+             //session_d();
             close();
         }
         else{
             location('没有任何被修改','member_modify.php');
-            session_d();
+             //session_d();
             close();
         }
     }

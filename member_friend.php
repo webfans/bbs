@@ -24,11 +24,11 @@ if (@$_GET['action']=='verify'&&isset($_GET['id'])){
         query("update bbs_friends set f_state=1 where f_id='{$_GET['id']}'");
         if (affetched_rows()==1){
             close();
-            session_d();
+             //session_d();
             location('好友验证成功','member_friend.php');
         }else{
             close();
-            session_d();
+             //session_d();
             alert_back('好友验证失败');
         }
 
@@ -50,11 +50,11 @@ if (@$_GET['action']=='delete'&&isset($_POST['id_chkbox'])){
         query("delete from bbs_friends where f_id in({$_clear['id_chkbox']})");
         if (affetched_rows()){
             close();
-            session_d();
+             //session_d();
             location('好友删除成功','member_friend.php');
         }else{
             close();
-            session_d();
+             //session_d();
             alert_back('删除失败');
         }
     }else{

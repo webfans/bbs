@@ -54,12 +54,12 @@ if ($_GET['action']=='addfri'){
                   ");
             if (affetched_rows()==1){
                 //清空session,腾出内存
-                session_d();
+                 //session_d();
                 close();
                 alert_back_close('好友请求发送成功');
             }
             else{
-                session_d();
+                 //session_d();
                 close();
                 alert_back('好友请求发送失败');
             }

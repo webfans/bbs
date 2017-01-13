@@ -18,17 +18,20 @@ if (@$_GET['action']=='post'){
     include ROOT_PATH.'includes/check.func.php';
     #安全验证#
     //1.验证码验证
-    check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    //check_vcode($_POST['vcode'],$_SESSION['vcode']);
     //2.对比唯一标识符
-    if (!!$row=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")){
+    if (!!$row=fetch_array("select u_uniqid,u_posttime from bbs_user where u_username='{$_COOKIE['username']}'")){
       safe_uniquid($row['u_niqid'],$_SESSION['uniqid']);
     }
+    //验证一下是否是在规定的时间内发帖，禁止在60s内发帖
+    //1#// post_checktime(time(),$_COOKIE['first_posttime']);
+    post_checktime(time(),$row['u_posttime']);
     //接收帖子数据
     $clean=array();
     $clean['username']=$_COOKIE['username'];
     $clean['type']=$_POST['article_type'];
-    $clean['title']=check_article_title($_POST['title'],2,40);
-    $clean['content']=check_article_title($_POST['content'],15,10000);
+    $clean['title']=check_article_title($_POST['title'],5,40);
+    $clean['content']=check_article_content($_POST['content'],15,10000);
     $clean=mysql_string($clean);
     //写入数据库
     query("insert into bbs.bbs_article(
@@ -49,14 +52,19 @@ if (@$_GET['action']=='post'){
     if (affetched_rows()==1){
         //获取刚刚新增的ID
         $clean['id']=mysql_insert_id();
+        //记录最近发贴时间 有两种方法，1#为cookie 2#二为写入数据库
+        //1#setcookie('first_posttime',time());
+        //2#将发主题贴的时间写入数据库
+        $clean['posttime']=time();
+        query("update bbs_user set u_posttime='{$clean['posttime']}' WHERE u_username='{$_COOKIE['username']}'");
         location('发贴成功','article.php?id='.$clean['id']);
         //清空session,腾出内存
-        session_d();
+        // // //session_d();
         close();
     }
     else{
         alert_back('发贴失败');
-        session_d();
+         // //session_d();
         close();
     }
 

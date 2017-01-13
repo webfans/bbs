@@ -86,14 +86,14 @@ if (@$_GET['action']=='register'){
         //location('恭喜你注册成功','active.php?action=ok&active='.$clean['active']);//加上OK不用点击，直接激活不知道为什么？
         location('恭喜你注册成功','active.php?active='.$clean['active']);
         //清空session,腾出内存
-        session_d();
+         //session_d();
         close();
         //生成用户信息XML
         set_xml('userinfo.xml',$clean);
     }
     else{
         location('注册失败','register.php');
-        session_d();
+         //session_d();
         close();
     }
 

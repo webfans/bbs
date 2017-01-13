@@ -41,12 +41,12 @@ if ($_GET['action']=='write'){
         //新增消息成功
         if (affetched_rows()==1){
             //清空session,腾出内存
-            session_d();
+             //session_d();
             close();
             alert_back_close('短信发送成功');
         }
         else{
-            session_d();
+             //session_d();
             close();
             alert_back('短信发送失败');
         }

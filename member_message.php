@@ -29,11 +29,11 @@ if (@$_GET['action']=='delete'&&isset($_POST['id_chkbox'])){
         query("delete from bbs_message where m_id in({$_clear['id_chkbox']})");
         if (affetched_rows()){
             close();
-            session_d();
+             //session_d();
             location('删除成功','member_message.php');
         }else{
             close();
-            session_d();
+             //session_d();
             alert_back('删除失败');
         }
     }else{

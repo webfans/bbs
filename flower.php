@@ -44,12 +44,12 @@ if ($_GET['action']=='send'){
         //新增消息成功
         if (affetched_rows()==1){
             //清空session,腾出内存
-            session_d();
+             //session_d();
             close();
             alert_back_close('送花成功');
         }
         else{
-            session_d();
+             //session_d();
             close();
             alert_back('送花失败');
         }

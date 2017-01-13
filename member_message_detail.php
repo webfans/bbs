@@ -29,11 +29,11 @@ if (@$_GET['action']=='delete'&&isset($_GET['msgid'])){
         query("delete from bbs_message where m_id={$_GET['msgid']}");
         if (affetched_rows()==1){
             close();
-            session_d();
+             //session_d();
             location('删除成功','member_message.php');
         }else{
             close();
-            session_d();
+             //session_d();
             alert_back('删除失败');
         }
     }else{
