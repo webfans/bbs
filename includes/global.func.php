@@ -10,6 +10,20 @@ function runtime(){
     $mtime=explode(' ',microtime());
     return $mtime[0]+$mtime[1];
 }
+//管理员登录
+function admin_login(){
+    if (!isset($_COOKIE['username'])||!isset($_SESSION['admin'])){
+        alert_back('非法登录');
+    }
+}
+
+
+//限制短时间内频繁发帖
+function post_checktime($now_time,$past_time,$sec=60){
+    if ($now_time-$past_time<$sec){
+        alert_back('请阁下休息一会儿再发贴');
+    }
+}
 function alert_back($msg){
     //history.go(-1):后退+刷新 history.back():后退
     echo "<script type=text/javascript>alert('".$msg."');history.back();</script>";
@@ -70,7 +84,7 @@ function session_d(){
 function cookie_d(){
     setcookie('username','',time()-1);
     setcookie('uniqid','',time()-1);
-    session_d();
+     //session_d();
     location('','index.php');
 }
 //生成验证码
@@ -342,4 +356,5 @@ function ubb($content){
 
     return $content;
 }
+
 
