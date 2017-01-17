@@ -4,9 +4,11 @@
 //等待网页加载完毕再执行
 window.onload=function () {
     var faceimg=document.getElementById('faceimg');
-    faceimg.onclick=function () {
-        window.open('face.php','face','width=400,height=400,top=0,left=0,scrollbars=1');
-    };
+    if(faceimg!=null){
+        faceimg.onclick=function () {
+            window.open('face.php','face','width=400,height=400,top=0,left=0,scrollbars=1');
+        };
+    }
     //验证码点击局部刷新
     /*vcode.onclick=function () {
         this.src='vcode.php?tm'+Math.random();
@@ -15,11 +17,12 @@ window.onload=function () {
     //表单验证
     //如果能用客户端验证就用客户端
     var fm=document.getElementsByTagName('form')[0];
+    if(fm==undefined) return;
    //alert(fm.username.value.length);
    fm.onsubmit=function () {
         //用户名验证
         //checkit('username',2,20,'同志，用户名不能小于2位或大于20位');
-      if(fm.username.value.length<2||fm.username.value.length>20){
+        if(fm.username.value.length<2||fm.username.value.length>20){
             alert('用户名不能小于2位或大于20位');
             fm.username.value='';//清空
             fm.username.focus();//将光标移到该字段
