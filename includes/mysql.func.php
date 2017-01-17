@@ -65,6 +65,18 @@ function is_repeat($sql,$msg){
 function affetched_rows(){
     return mysql_affected_rows();
 }
+//$session_destroy=1则清除session
+function after_query($okmsg,$failed_msg,$ok_url,$session_destroy=0){
+    if (affetched_rows()==1){
+        location($okmsg,$ok_url);
+        close();
+        if (!empty($session_destroy)){
+            session_d();
+        }
+    }else{
+        alert_back($failed_msg);
+    }
+}
 
 //关闭连接
 function close(){
