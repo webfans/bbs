@@ -12,7 +12,7 @@ function runtime(){
 }
 //管理员登录
 function admin_login(){
-    if (!isset($_COOKIE['username'])||!isset($_SESSION['admin'])){
+    if (!isset($_COOKIE['username'])||!isset($_SESSION['admin'])||($_COOKIE['username'])!=$_SESSION['admin']){
         alert_back('非法登录');
     }
 }
@@ -268,12 +268,23 @@ function html_spec($str){
     }
     return $str;
 }
-//为了防止Cookie伪造，还要比对一下唯一标识符uniquid
-function safe_uniquid($mysql_uniquid,$cookie_uniqid){
-    if ($mysql_uniquid!=$cookie_uniqid){
+//为了防止Cookie伪造，还要比对一下唯一标识符uniqid
+function safe_uniqid($mysql_uniqid,$cookie_uniqid){
+    if ($mysql_uniqid!=$cookie_uniqid){
         alert_back('唯一标识符异常');
     }
 }
+//再次封装，防止Cookie伪造
+function block_fake_cookie(){
+    if (!!$_rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")) {
+        //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
+        safe_uniqid($_rows['u_uniqid'], $_COOKIE['uniqid']);
+    }else{
+        alert_back('不要法登录');;
+    }
+}
+//affecch_rows
+
 //长文本以摘要的形式显示
 function summary($str,$length=14){
     if (mb_strlen($str,'utf-8')>$length){
