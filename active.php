@@ -40,7 +40,7 @@ if (isset($_GET['action']) && isset($_GET['active']) && $_GET['action']=='ok'){
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <!--根据SCRIPT调用相应的CSS-->
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>PSY520多用户留言系统-激活页</title>
+    <!--<title>PSY520多用户留言系统-激活页</title>-->
 </head>
 <body>
 <?php
