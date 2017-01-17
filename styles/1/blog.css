@@ -1,6 +1,6 @@
 #blog{
     width:auto;
-    height: 600px;
+    height: auto;
     border: 2px solid #ccc;
     font-size: 12px;
 }

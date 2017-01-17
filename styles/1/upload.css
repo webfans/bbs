@@ -1,0 +1,25 @@
+body{
+    width: auto;
+}
+#face h3{
+    width: 80%;
+    margin: 10px auto;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px dashed #333;
+    font-size: 12px;
+
+}
+#face dl{
+    width: 80%;
+    margin: 0 auto;/*水平剧中*/
+}
+#face dl dd{
+    float: left;
+    width: 102px;
+    text-align: center;
+}
+#face dl dd img{
+    cursor: pointer;
+}
