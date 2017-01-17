@@ -40,3 +40,21 @@ if (empty($message['counts'])){
 }else{
     $msg='<strong  class="noread"><a href="member_message.php"><span>('.$message['counts'].')</span></a></strong>';
 }
+
+//网站初始化
+if (!!$rows=fetch_array("select * from bbs.bbs_system WHERE sys_id=1")){
+    $sys=array();
+    $sys['webname']=$rows['sys_webname'];
+    $sys['article']=$rows['sys_article'];
+    $sys['blog']=$rows['sys_blog'];
+    $sys['photo']=$rows['sys_photo'];
+    $sys['skin']=$rows['sys_skin'];
+    $sys['filterstr']=$rows['sys_filter_str'];
+    $sys['postlimit']=$rows['sys_postlimit'];
+    $sys['replylimit']=$rows['sys_replylimit'];
+    $sys['vcode']=$rows['sys_vcode'];
+    $sys['register']=$rows['sys_register'];
+    $sys=html_spec($sys);
+}else{
+    alert_back('系统表异常');
+}
