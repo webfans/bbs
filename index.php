@@ -16,8 +16,9 @@ $_html=html_spec(get_xml('userinfo.xml'));
 //分布模块 分页容错处理
 //WHERE art_reid=0 表示帖子是主题贴，而不是别人回复的帖子
 global $_pagenum,$_pagesize;
+global $sys;
 $count_sql="select art_id from bbs_article  WHERE art_reid=0";
-paging_fault_tolerant($count_sql,10);
+paging_fault_tolerant($count_sql,$sys['article']);
 
 //从数据库读取数据
 $sql="select art_id,art_type,art_title,art_content,art_readcount,art_comment
@@ -34,7 +35,6 @@ $result=query($sql);
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <script type="text/javascript" src="js/blog.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>多用户留言系统</title>
 </head>
 <body>
 <?php
