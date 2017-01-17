@@ -11,6 +11,49 @@ define('SCRIPT','manage_set');
 require dirname(__FILE__).'/includes/common.inc.php';
 //只能管理员访问
 admin_login();
+if ($_GET['action']=='set'){
+    if (!!$rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")) {
+        //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
+        safe_uniqid($rows['u_uniqid'], $_COOKIE['uniqid']);
+        $_clean=array();
+        $_clean['webname']=$_POST['webname'];
+        $_clean['article']=$_POST['article'];
+        $_clean['blog']=$_POST['blog'];
+        $_clean['photo']=$_POST['photo'];
+        $_clean['skin']=$_POST['skin'];
+        $_clean['filterstr']=$_POST['filter_str'];
+        $_clean['post']=$_POST['post'];
+        $_clean['reply']=$_POST['reply'];
+        $_clean['vcode']=$_POST['vcode'];
+        $_clean['register']=$_POST['register'];
+        $_clean=mysql_string($_clean);
+        //写入更新操作
+        query("update bbs.bbs_system set
+                                        sys_webname='{$_clean['webname']}',
+                                        sys_article='{$_clean['article']}',
+                                        sys_blog='{$_clean['blog']}',
+                                        sys_photo='{$_clean['photo']}',
+                                        sys_skin='{$_clean['skin']}',
+                                        sys_filter_str='{$_clean['filterstr']}',
+                                        sys_postlimit='{$_clean['post']}',
+                                        sys_replylimit='{$_clean['reply']}',
+                                        sys_vcode='{$_clean['vcode']}',
+                                        sys_register='{$_clean['register']}'
+                                       WHERE sys_id=1 LIMIT 1
+              ");
+        if (affetched_rows()==1){
+            location('恭喜你修改成功','manage_set.php');
+            close();
+        }
+        else{
+            location('没有任何被修改','member_modify.php');
+            //session_d();
+            close();
+        }
+    }else{
+        alert_back('系统异常');
+    }
+}
 //读取系统表
 if (!!$rows=fetch_array("select * from bbs.bbs_system WHERE sys_id=1")){
     $sysinfo=array();
@@ -20,8 +63,8 @@ if (!!$rows=fetch_array("select * from bbs.bbs_system WHERE sys_id=1")){
     $sysinfo['photo']=$rows['sys_photo'];
     $sysinfo['skin']=$rows['sys_skin'];
     $sysinfo['fiter_str']=$rows['sys_filter_str'];
-    $sysinfo['post']=$rows['sys_post'];
-    $sysinfo['reply']=$rows['sys_reply'];
+    $sysinfo['post']=$rows['sys_postlimit'];
+    $sysinfo['reply']=$rows['sys_replylimit'];
     $sysinfo['vcode']=$rows['sys_vcode'];
     $sysinfo['register']=$rows['sys_register'];
     $sysinfo=html_spec($sysinfo);
@@ -90,35 +133,35 @@ if (!!$rows=fetch_array("select * from bbs.bbs_system WHERE sys_id=1")){
     //跟帖冻结时间
     if ($sysinfo['reply']==15){
         $sysinfo['reply_html']='<input type="radio" name="reply" value="15" checked>15秒
-                                <input type="radio" name="reply" value="30">30秒;
+                                <input type="radio" name="reply" value="30">30秒
                                 <input type="radio" name="reply" value="45">45秒';
     }elseif ($sysinfo['reply']==30){
         $sysinfo['reply_html']='<input type="radio" name="reply" value="15">15秒
-                                <input type="radio" name="reply" value="30" checked>30秒;
+                                <input type="radio" name="reply" value="30" checked>30秒
                                 <input type="radio" name="reply" value="45">45秒';
     }elseif ($sysinfo['reply']==45){
         $sysinfo['reply_html']='<input type="radio" name="reply" value="15">15秒
-                                <input type="radio" name="reply" value="30">30秒;
+                                <input type="radio" name="reply" value="30">30秒
                                 <input type="radio" name="reply" value="45" checked>45秒';
     }
     //验证码
     if ($sysinfo['vcode']==1){
         $sysinfo['vcode_html']='<input type="radio" name="vcode" value="1" checked>启用
-                                <input type="radio" name="vcode" value="0">禁用;
+                                <input type="radio" name="vcode" value="0">禁用
                                ';
     }else{
         $sysinfo['vcode_html']='<input type="radio" name="vcode" value="1">启用
-                                <input type="radio" name="vcode" value="0" checked>禁用;
+                                <input type="radio" name="vcode" value="0" checked>禁用
                                ';
     }
     //开放注册 
     if ($sysinfo['register']==1){
         $sysinfo['register_html']='<input type="radio" name="register" value="1" checked>启用
-                                <input type="radio" name="register" value="0">禁用;
+                                <input type="radio" name="register" value="0">禁用
                                ';
     }else{
         $sysinfo['register_html']='<input type="radio" name="register" value="1">启用
-                                <input type="radio" name="register" value="0" checked>禁用;
+                                <input type="radio" name="register" value="0" checked>禁用
                                ';
     }
 
