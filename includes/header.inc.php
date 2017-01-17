@@ -26,10 +26,18 @@ if (!defined('IN_TG')){
         ?>
 
         <li><a href="blog.php">博友</a></li>
+        <li><a href="photo.php">相册</a></li>
         <li>风格</li>
         <?php
-            if (isset($_COOKIE['username'])&& isset($_SESSION['admin'])) {
-                echo '<li><a href="manage.php" class="admin">管理</a> </li>';
+        //if (isset($_COOKIE['username'])&& isset($_SESSION['admin'])){
+        //   echo '<li><a href="manage.php" class="admin">管理</a> </li>';
+        //}
+        //上面这种写法有bug 如果前一个管理员登录，退出后没有清空相应的session,那么普通会员登录，都会神奇的变成管理员
+        //为了代码健壮还应该判断sesion和cookie是否相等
+            if (isset($_COOKIE['username'])&&isset($_SESSION['admin'])) {
+                if ($_COOKIE['username']==$_SESSION['admin']){
+                    echo '<li><a href="manage.php" class="admin">管理</a> </li>';
+                }
             }
         ?>
         <?php
