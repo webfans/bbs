@@ -12,9 +12,9 @@ if (!defined('IN_TG')){
 </dl>
 <dl>
     <dt>会员管理</dt>
-    <dd><a href="member_message.php">普通会员</a> </dd>
-    <dd><a href="member_friend.php">特殊会员</a> </dd>
-    <dd><a href="member_flower.php">职业任命</a> </dd>
+    <dd><a href="manage_member.php">普通会员</a> </dd>
+    <dd><a href="manage_root.php">特殊会员</a> </dd>
+    <dd><a href="manage_role.php">职业任命</a> </dd>
 </dl>
 <dl>
     <dt>帖子管理</dt>
