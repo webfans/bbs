@@ -21,7 +21,7 @@ if (@$_GET['action']=='delete'&&isset($_GET['msgid'])){
         #!当你进行危险操作时（比如删除）之前，最好还要对唯一标识符进行验证!
         if (!!$_rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")) {
             //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
-            safe_uniquid($_rows['u_uniquid'], $_COOKIE['uniquid']);
+            safe_uniqid($_rows['u_uniqid'], $_COOKIE['uniqid']);
         }else{
             alert_back('非常登录');
         }
@@ -77,7 +77,7 @@ if (isset($_GET['id'])){
     <script type="text/javascript" src="js/member_modify.js"></script>
     <script type="text/javascript" src="js/member_message_detail.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>短信详情</title>
+   <!--<title>短信详情</title>-->
 </head>
 <body>
 <?php

@@ -16,8 +16,8 @@ if ($_GET['action']=='write'){
     //验证吗检验
     check_vcode($_POST['vcode'],$_SESSION['vcode']);
     if (!!$rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")){
-        //为了防止Cookie伪造，还要比对一下唯一标识符uniquid
-        safe_uniquid($rows['u_uniquid'],$_COOKIE['uniquid']);
+        //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
+        safe_uniqid($rows['u_uniqid'],$_COOKIE['uniqid']);
         $_clean=array();
         $_clean['touser']=$_POST['touser'];
         $_clean['fromuser']=$_COOKIE['username'];
@@ -78,7 +78,7 @@ if (isset($_GET['id'])){
     <?php require ROOT_PATH.'includes/title.inc.php'?>
     <script type="text/javascript" src="js/vcode.js"></script>
     <script type="text/javascript" src="js/message.js"></script>
-    <title>发短信</title>
+    <!--<title>发短信</title>-->
 </head>
 <body>
 <div id="message">

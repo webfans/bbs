@@ -21,11 +21,12 @@ if (@$_GET['action']=='post'){
     //check_vcode($_POST['vcode'],$_SESSION['vcode']);
     //2.对比唯一标识符
     if (!!$row=fetch_array("select u_uniqid,u_posttime from bbs_user where u_username='{$_COOKIE['username']}'")){
-      safe_uniquid($row['u_niqid'],$_SESSION['uniqid']);
+      safe_uniqid($row['u_niqid'],$_SESSION['uniqid']);
     }
-    //验证一下是否是在规定的时间内发帖，禁止在60s内发帖
+    //验证一下是否是在规定的时间内发帖，禁止在$sys['postlimit']60s内发帖
     //1#// post_checktime(time(),$_COOKIE['first_posttime']);
-    post_checktime(time(),$row['u_posttime']);
+    global $sys;
+    post_checktime(time(),$row['u_posttime'],$sys['postlimit']);
     //接收帖子数据
     $clean=array();
     $clean['username']=$_COOKIE['username'];
@@ -82,7 +83,7 @@ if (@$_GET['action']=='post'){
     <script type="text/javascript" src="js/post.js"></script>
 
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>发表帖子</title>
+    <!--<title>发表帖子</title>-->
 </head>
 <body>
 <?php require ROOT_PATH.'includes/header.inc.php'; ?>
@@ -111,7 +112,11 @@ if (@$_GET['action']=='post'){
                 <?php require ROOT_PATH.'includes/ubb.inc.php'; ?>
                 <textarea  name="content" rows="10"></textarea></dd>
             <dd>
-                验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/>
+                <?php
+                  if ($sys['vcode']==1){
+                    echo  '验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/>';
+                }
+                ?>
                 <input type="submit" name="submit" class="submit" value="发送文章">
             </dd>
 

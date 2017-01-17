@@ -18,10 +18,11 @@ if ($_GET['action']=='RE'){
     //check_vcode($_POST['vcode'],$_SESSION['vcode']);
     //2.对比唯一标识符
     if (!!$row=fetch_array("select u_uniqid,u_replytime from bbs_user where u_username='{$_COOKIE['username']}'")){
-        safe_uniquid($row['u_niqid'],$_SESSION['uniqid']);
+        safe_uniqid($row['u_niqid'],$_SESSION['uniqid']);
         //限制频繁跟帖
+        global $sys;
         //post_checktime(time(),$_COOKIE['first_replytime'],30);
-        post_checktime(time(),$row['u_replytime'],20);
+        post_checktime(time(),$row['u_replytime'],$sys['relplylimit']);
         //接受跟贴表单数据
         $clean=array();
         $clean['reid']=$_POST['reid'];
@@ -153,7 +154,7 @@ if (isset($_GET['id'])){
     <script type="text/javascript" src="js/vcode.js"></script>
     <script type="text/javascript" src="js/article.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>帖子页面</title>
+    <!--<title>帖子页面</title>-->
 </head>
 <body>
 <?php

@@ -17,8 +17,8 @@ if (@$_GET['action']=='modify'){
 
     // 如果cookie存在，才允许提交修改数据验证
     if (!!$rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")){
-        //为了防止Cookie伪造，还要比对一下唯一标识符uniquid
-        safe_uniquid($rows['u_uniquid'],$_COOKIE['uniquid']);
+        //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
+        safe_uniqid($rows['u_uniqid'],$_COOKIE['uniqid']);
 
         $clean=array();
         $clean['password']=check_modify_pwd($_POST['password'],6);
@@ -146,7 +146,7 @@ if (isset($_COOKIE['username'])){
     <!--客户端验证表单，减少服务器端验证负担-->
     <script type="text/javascript" src="js/member_modify.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>会员管理中心</title>
+    <!--<title>会员管理中心</title>-->
 </head>
 <body>
 <?php

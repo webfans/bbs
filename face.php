@@ -17,7 +17,7 @@ require dirname(__FILE__).'/includes/common.inc.php';
     <?php require ROOT_PATH.'includes/title.inc.php'?>
     <script type="text/javascript" src="js/register.js"></script>
     <script type="text/javascript" src="js/opener.js"></script>
-    <title>头像选取页面</title>
+    <!--<title>头像选取页面</title>-->
 </head>
 <body>
 <div id="face">

@@ -18,8 +18,10 @@ require dirname(__FILE__).'/includes/common.inc.php';
  *  */
 //分布模块 分页容错处理
 global $_pagenum,$_pagesize;
+global $sys;
 $sql="select u_id from bbs_user";
-paging_fault_tolerant($sql,15);
+//$sys['sys_blog']为后台系统设置指定的，每页的列表数
+paging_fault_tolerant($sql,$sys['blog']);
 
 //从数据库读取数据
 $sql="select u_id,u_username,u_sex,u_face from bbs_user ORDER BY u_regtime DESC LIMIT $_pagenum,$_pagesize";
@@ -32,7 +34,7 @@ $result=query($sql);
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <script type="text/javascript" src="js/blog.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>博友页面</title>
+    <!--<title>博友页面</title>-->
 </head>
 <body>
 <?php
@@ -54,8 +56,6 @@ require ROOT_PATH.'includes/header.inc.php';
             $_html['face']=$rows['u_face'];
             $_html['sex']=$rows['u_sex'];
             $_html=html_spec($_html);
-
-
     ?>
     <dl>
         <dd class="user"><?php echo $_html['username'];?></dd>

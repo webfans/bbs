@@ -50,7 +50,7 @@ if (isset($_COOKIE['username'])){
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>个人中心</title>
+   <!-- <title>个人中心</title>-->
 </head>
 <body>
 <?php

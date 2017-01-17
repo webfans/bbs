@@ -21,7 +21,7 @@ if (isset($_GET['num']) && isset($_GET['path'])){
     <?php require ROOT_PATH.'includes/title.inc.php'?>
     <script type="text/javascript" src="js/register.js"></script>
     <script type="text/javascript" src="js/qopener.js"></script>
-    <title>Q贴图选取页面</title>
+    <!--<title>Q贴图选取页面</title>-->
 </head>
 <body>
 <div id="q">

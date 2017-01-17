@@ -24,7 +24,7 @@ if (@$_GET['action']=='delete'&&isset($_POST['id_chkbox'])){
     #!当你进行危险操作时（比如删除）之前，最好还要对唯一标识符进行验证!
     if (!!$_rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")) {
         //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
-        safe_uniquid($_rows['u_uniqid'], $_COOKIE['uniqid']);
+        safe_uniqid($_rows['u_uniqid'], $_COOKIE['uniqid']);
         //开始批量删除
         query("delete from bbs_flower where fl_id in({$_clear['id_chkbox']})");
         if (affetched_rows()){
@@ -60,7 +60,7 @@ $result=query($sql);
     <!--客户端验证表单，减少服务器端验证负担-->
     <script type="text/javascript" src="js/member_message.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>会员管理中心-花朵</title>
+    <!--<title>会员管理中心-花朵</title>-->
 </head>
 <body>
 <?php

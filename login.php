@@ -13,7 +13,9 @@ if (@$_GET['action']=='login'){
     //include 在需要时引入
     include ROOT_PATH.'includes/login.func.php';
     //验证码验证
-    check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    if ($sys['vcode']==1){
+        check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    }
     //授受数据
     //创建一个空数据用来放提交过来的合法的数据
     $clean=array();
@@ -55,7 +57,7 @@ if (@$_GET['action']=='login'){
     <?php require ROOT_PATH.'includes/title.inc.php'?>
     <script type="text/javascript" src="js/vcode.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <title>PSY520多用户留言系统-激活页</title>
+    <!--<title>PSY520多用户留言系统-激活页</title>-->
 </head>
 <body>
 <?php
@@ -76,7 +78,13 @@ require ROOT_PATH.'includes/header.inc.php';
                 <input type="radio" name="time" value="2"  class="radio">一周
                 <input type="radio" name="time" value="3"  class="radio">一月
             </dd>
-            <dd>验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/> </dd>
+            <dd>
+                <?php
+                if ($sys['vcode']==1){
+                    echo '验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/>';
+                }
+                ?>
+            </dd>
             <dd>
                 <input type="submit" name="submit" class="submit_btn" value="登录">
                 <input type="button" name="loacation" class="submit_btn location" value="注册" id="location">

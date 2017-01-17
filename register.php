@@ -13,13 +13,22 @@ require dirname(__FILE__).'/includes/common.inc.php';
 #mysql_query("insert into bbs_user(u_question) VALUES('howoldareu')") or  die('sql执行错误'.mysql_error());
 //登录状态下 防止注册
 block_login_reg();
+global $sys;
 //判断是否提交了数据 数据提交到本页
 if (@$_GET['action']=='register'){
+    //加入判断是否允许注册
+    //防止仅仅屏蔽显示注册表单后，黑客直接通过浏览器actiou=register，伪造表提交注册数据
+    if ($sys['register']==0){
+        exit('请不要非法注册!');
+    }
     //include 在需要时引入
     include ROOT_PATH.'includes/check.func.php';
     //为了防止恶意注册和跨
     //验证码正确才进行数据授受
-    check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    global $sys;
+    if ($sys['vcode']==1){
+        check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    }
     //授受数据
     //创建一个空数据用来放提交过来的合法的数据
     $clean=array();
@@ -117,11 +126,12 @@ if (@$_GET['action']=='register'){
     <script type="text/javascript" src="js/register.js"></script>
 
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>注册页</title>
+    <!--<title>注册页</title>-->
 </head>
 <body>
 <?php require ROOT_PATH.'includes/header.inc.php'; ?>
 <div id="register">
+    <?php if ($sys['register']==1){?>
     <h2>用户注册</h2>
     <form action="register.php?action=register" method="post" name="register">
         <!--uniqid这个隐藏域用来生成唯一标识符-->
@@ -146,6 +156,12 @@ if (@$_GET['action']=='register'){
 
         </dl>
     </form>
+    <?php
+    }else{
+        //echo 'Oops!管理员已关闭了论坛注册！';
+        alert_back('oops,管理员已经关闭了注册通道！');
+    }
+    ?>
 </div>
 <?php require ROOT_PATH.'includes/footer.inc.php'; ?>
 </body>

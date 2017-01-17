@@ -19,7 +19,7 @@ if (!isset($_COOKIE['username'])){
 if (@$_GET['action']=='verify'&&isset($_GET['id'])){
     if (!!$_rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")) {
         //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
-        safe_uniquid($_rows['u_uniqid'], $_COOKIE['uniqid']);
+        safe_uniqid($_rows['u_uniqid'], $_COOKIE['uniqid']);
         //开始修改表里的f_state，从而通过验证
         query("update bbs_friends set f_state=1 where f_id='{$_GET['id']}'");
         if (affetched_rows()==1){
@@ -45,7 +45,7 @@ if (@$_GET['action']=='delete'&&isset($_POST['id_chkbox'])){
     #!当你进行危险操作时（比如删除）之前，最好还要对唯一标识符进行验证!
     if (!!$_rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")) {
         //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
-        safe_uniquid($_rows['u_uniqid'], $_COOKIE['uniqid']);
+        safe_uniqid($_rows['u_uniqid'], $_COOKIE['uniqid']);
         //开始批量删除
         query("delete from bbs_friends where f_id in({$_clear['id_chkbox']})");
         if (affetched_rows()){
@@ -81,7 +81,7 @@ $result=query($sql);
     <!--客户端验证表单，减少服务器端验证负担-->
     <script type="text/javascript" src="js/member_message.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>会员管理中心-好友管理</title>
+    <!--<title>会员管理中心-好友管理</title>-->
 </head>
 <body>
 <?php

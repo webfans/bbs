@@ -22,7 +22,7 @@ if ($_GET['action']=='modify'){
     //check_vcode($_POST['vcode'],$_SESSION['vcode']);
     //2.对比唯一标识符
     if (!!$row=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")){
-        safe_uniquid($row['u_niqid'],$_SESSION['uniqid']);
+        safe_uniqid($row['u_niqid'],$_SESSION['uniqid']);
     }else{alert_back('您非法伪造了Cookie');}
     $clean=array();
     $clean['id']=$_POST['id'];//就是贴子id
@@ -95,7 +95,7 @@ else{
     <script type="text/javascript" src="js/post.js"></script>
 
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>修改帖子</title>
+    <!--<title>修改帖子</title>-->
 </head>
 <body>
 <?php require ROOT_PATH.'includes/header.inc.php'; ?>

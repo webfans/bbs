@@ -11,7 +11,6 @@ define('SCRIPT','manage');
 require dirname(__FILE__).'/includes/common.inc.php';
 //只能管理员访问
 admin_login();
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,7 +21,7 @@ admin_login();
     <!--客户端验证表单，减少服务器端验证负担-->
     <script type="text/javascript" src="js/member_modify.js"></script>
     <?php require ROOT_PATH.'includes/title.inc.php'?>
-    <title>后台管理</title>
+    <!--<title>后台管理</title>-->
 </head>
 <body>
 <?php
@@ -39,7 +38,7 @@ require ROOT_PATH.'includes/header.inc.php';
         <form action="?action=modify" method="post" name="modify">
             <dl>
                 <dd>服务器主机名：<?php echo $_SERVER['SERVER_NAME']?></dd>
-                <dd>服务器版本：<?php echo PHP_OS;?></dd>
+                <dd>服务器版本：<?php echo php_uname('v');?></dd>
                 <dd>通信协议：<?php echo $_SERVER['SERVER_PROTOCOL']?></dd>
                 <dd>服务器IP：<?php echo $_SERVER['SERVER_ADDR']?></dd>
                 <dd>服务器端口：<?php echo $_SERVER['SERVER_PORT']?></dd>
