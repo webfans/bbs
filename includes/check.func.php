@@ -8,6 +8,7 @@ if (!function_exists('alert_back')){
 if (!function_exists('mysql_string')){
     echo 'mysql_string函数不存在，请检查';
 }
+
 function check_uniqid($first_uniqid,$second_uniqid){
     if ((strlen($first_uniqid)!=40)||($first_uniqid!=$second_uniqid)){
         //alert_back('唯一标识符异常，非法数据提交');
@@ -25,6 +26,7 @@ function check_uniqid($first_uniqid,$second_uniqid){
 
  * */
 function check_username($str_username,$min_num,$max_num){
+    global $sys;
     //去年两边的空格
     $str_username=trim($str_username);
     //长度限制
@@ -37,17 +39,18 @@ function check_username($str_username,$min_num,$max_num){
         alert_back('用户名不能有特殊符号');
     }
     //限制敏感用户名
-    $mg[0]='毛泽东';
-    $mg[1]='邓小平';
-    $mg[3]='江泽民';
+    //$mg[0]='毛泽东';
+    //$mg[1]='邓小平';
+    //$mg[3]='江泽民';
+    $mg=explode('|',$sys['filterstr']);
     //告诉用户哪些敏感信息不能注册
+    $mg_string='';
     foreach ($mg as $value){
-        $mg_string='';
         $mg_string.=$value.'\n';
     }
     //这里采用绝对匹配
     if (in_array($str_username,$mg)){
-        alert_back($mg_string.'敏感用户名不能注册');
+        alert_back($mg_string.'是敏感用户名，不能注册');
     }
     //将用户名转义输入，防SQL注入
     //return mysql_real_escape_string($strings);
@@ -76,7 +79,7 @@ function check_modify_pwd($first_pwd,$min_pwd){
     }
     return sha1($first_pwd);
 }
-
+//密码问题校验
 function check_question($strings,$min_num,$max_num){
     $strings=trim($strings);
     if (mb_strlen($strings,'utf-8')<$min_num||mb_strlen($strings,'utf-8')>$max_num){
@@ -88,6 +91,7 @@ function check_question($strings,$min_num,$max_num){
     return mysql_string($strings);
     //return $strings;
 }
+//密码回答校验
 function check_answer($question,$answer,$min_num,$max_num){
     if (mb_strlen($answer,'utf-8')<$min_num||mb_strlen($answer,'utf-8')>$max_num){
         alert_back('密码提示不能小于'.$min_num.'位或大于'.$max_num.'位');
@@ -148,27 +152,42 @@ function check_sex($str_sex){
 function check_face($str_face){
     return mysql_string($str_face);
 }
+//短信内容校验
 function check_content($content,$min_num,$max_num){
    if( mb_strlen($content,'utf-8')<$min_num||mb_strlen($content,'utf-8')>$max_num){
        alert_back('短信内容不能小于'.$min_num.'位或大于'.$max_num.'位');
    }
    return $content;
 }
+//帖子标题校验
 function check_article_title($title,$min_num,$max_num){
     if( mb_strlen($title,'utf-8')<$min_num||mb_strlen($title,'utf-8')>$max_num){
         alert_back('帖子标题不能小于'.$min_num.'位或大于'.$max_num.'位');
     }
     return $title;
 }
+//帖子内容校验
 function check_article_content($content,$min_num,$max_num){
     if( mb_strlen($content,'utf-8')<$min_num||mb_strlen($content,'utf-8')>$max_num){
         alert_back('帖子内容不能小于'.$min_num.'位或大于'.$max_num.'位');
     }
     return $content;
 }
+//个性签名校验
 function check_autograph($content,$max_num){
     if(mb_strlen($content,'utf-8')>$max_num){
         alert_back('个性签名不能大于'.$max_num.'位');
     }
     return $content;
+}
+//##通用校验## 可以替代上边的 密码问题校验|短信内容校验|帖子内容校验|个性签名校验 ！！！减少冗余代码！！！
+function check_length($content,$myname,$min_num,$max_num,$is_pwd='no'){
+    if( mb_strlen($content,'utf-8')<$min_num||mb_strlen($content,'utf-8')>$max_num){
+        alert_back($myname.'不能小于'.$min_num.'位或大于'.$max_num.'位');
+    }
+    if ($is_pwd=='yes'||$is_pwd==1){
+        return sha1($content);
+    }else{
+        return $content;
+    }
 }
