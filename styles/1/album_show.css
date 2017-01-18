@@ -1,0 +1,51 @@
+#album{
+    width:auto;
+    height: auto;
+    border: 2px solid #ccc;
+    font-size: 12px;
+}
+#album h2{
+    font-size: 12px;
+    text-indent: 0;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+#album p {
+    text-align: center;
+    padding: 20px;
+    clear: both;
+}
+#album p a{
+    font-size: 14px;
+    color: #333;
+}
+#album dl{
+    width: 180px;
+    height: 150px;
+    margin: 20px;
+    float: left;
+}
+#album dl dt{
+    width: 94px;
+    height: 93px;
+    margin: 20px auto;
+    background: url("../../images/album.jpg") no-repeat left center;
+}
+#album dl dt img{
+    display: block;
+    padding: 10px 0 0 14px;
+}
+#album dl dd{
+    width: 90px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5px 0;
+}
+#album dl dd a{
+    color:#333;
+    text-decoration: none;
+}
+#album dl dd a:hover{
+    color: #f60;
+    text-decoration: underline;
+}

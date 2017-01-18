@@ -1,0 +1,43 @@
+#album{
+    width:auto;
+    height: 450px;
+    border: 2px solid #ccc;
+    font-size: 12px;
+}
+#album h2{
+    font-size: 12px;
+    text-indent: 0;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+#album dl{
+    width: 280px;
+    margin: 20px auto;
+}
+#album dl dd{
+    margin: 5px 0;
+}
+#album dl dd#pass{
+    display: none;
+}
+#album dl dd input.text{
+    background: #fff;
+    border: 1px dashed #333;
+    width: 180px;
+    height: 19px;
+}
+#album dl dd textarea{
+    background: #fff;
+    border: 1px dashed #333;
+    width: 180px;
+    height: 70px;
+}
+#album dl dd input.submit{
+    background: #fff;
+    border: 1px dashed #333;
+    width: 60px;
+    height: 19px;
+    padding: 0 0 2px 0;/*为什么不起作用呢？*/
+    margin-left: 100px;
+    cursor: pointer;
+}
