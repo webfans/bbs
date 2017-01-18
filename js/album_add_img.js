@@ -4,7 +4,7 @@
 window.onload=function () {
     var upload=document.getElementById('upload');
     upload.onclick=function () {
-        centerWindow('upload.php','upload','100','400');
+        centerWindow('upload.php?dir='+this.title,'upload','100','400');
     }
 }
 //保证窗口始终在中间
