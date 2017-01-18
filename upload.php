@@ -15,8 +15,11 @@ if ($_GET['action']=='upload'){
     //开始上传照片
     //还有两个问题要处理
     define('MAX_SIZE',2000000);
-    define('URL',dirname(__FILE__).'\photo');
-
+    //define('URL',dirname(__FILE__).'\album');
+    //接受上传路径dir
+    if (!isset($_GET['action'])=='dir'){
+        alert_back('非法上传');
+    }
     #1.设置上传图片的类型
     $filemimes=array('image/jpeg','image/pjpeg','image/png','image/png','image/x-png');
     //判断[文件类型]是否是数组中规定的类型的一种，跟下面的switch效果是一样的，只不过写法更简化
@@ -45,18 +48,22 @@ if ($_GET['action']=='upload'){
     if ($_FILES['userfile']['size']>MAX_SIZE){
         echo "<script>alert('上传文件超过内定文件限制大小2兆');history.back();</script>";
     }
+  ##################################################
     //is_uploaded_file()
     //判断文件是否通过HTTP POST 上传的
     //通过HTTP POST 上传后，文件会存放在临时文件夹
-
+  ##################################################
     //#4.移动文件
+     #4.1获取文件扩展名 myname.jpg //$ext_name[0]=myname $file_name[1]=jpg 以时间戳重命名文件名time().'.'.$file_name[1]
+     //$file_name=explode('.',$_FILES['userfile']['name']);
+     //$uploaded_name=$_POST['dir'].'/'.time().'.'.$file_name[1];//这样就可以避免相同文件名的覆盖问题了
+     $uploaded_name=$_POST['dir'].'/'.$_FILES['userfile']['name'];//这样就可以避免相同文件名的覆盖问题了
+
     if (is_uploaded_file($_FILES['userfile']['tmp_name'])){
-        echo '上传的临时文件存在，等待移动中...';
         //move_uploaded_file(临时文件地址，你要存放的地址)移动文件到指定的地方
         //注意写法：URL.'/'.$_FILES['userfile']['name'] .'/正斜杠'.将目录和文件名 相加and
-        if (!move_uploaded_file($_FILES['userfile']['tmp_name'],URL.'/'.$_FILES['userfile']['name'])){
+        if (!move_uploaded_file($_FILES['userfile']['tmp_name'],$uploaded_name)){
             //如果移动失败，就失败
-            //echo '移动失败';
             echo "<script>alert('移动失败');</script>";
             exit();
         }
@@ -71,7 +78,10 @@ if ($_GET['action']=='upload'){
     //必须传一个值给upload_file_show.php
 
     #学PHP 李炎恢38-42
-    echo "<script>alert('上传文件成功');location.href='upload_file_show.php?url=".$_FILES['userfile']['name']."'</script>";
+    echo "<script>
+          alert('上传文件成功');window.opener.document.getElementById('albumurl').value='$uploaded_name';
+          window.close();
+          </script>";
 
 
 }
@@ -90,6 +100,7 @@ if ($_GET['action']=='upload'){
 <div id="face">
     <h3>上传照片</h3>
     <form enctype="multipart/form-data" action="?action=upload" method="post">
+        <input type="hidden" name="dir" value="<?php echo $_GET['dir']?>"><!--隐藏字段存放上传路径-->
         <input type="hidden" name="MAX_FILE_SIZE" VALUE="1000000">
         上传文件：<input type="file" name="userfile">
         <input type="submit" value="上传"/>
