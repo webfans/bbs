@@ -181,13 +181,19 @@ function check_autograph($content,$max_num){
     return $content;
 }
 //##通用校验## 可以替代上边的 密码问题校验|短信内容校验|帖子内容校验|个性签名校验 ！！！减少冗余代码！！！
-function check_length($content,$myname,$min_num,$max_num,$is_pwd='no'){
+function check_length($content,$msg_name,$min_num,$max_num,$is_pwd='no'){
     if( mb_strlen($content,'utf-8')<$min_num||mb_strlen($content,'utf-8')>$max_num){
-        alert_back($myname.'不能小于'.$min_num.'位或大于'.$max_num.'位');
+        alert_back($msg_name.'不能小于'.$min_num.'位或大于'.$max_num.'位');
     }
     if ($is_pwd=='yes'||$is_pwd==1){
         return sha1($content);
     }else{
         return $content;
     }
+}
+function not_null($str,$msg_name){
+    if (empty($str)){
+        alert_back($msg_name.'不能为空');
+    }
+    return $str;
 }
