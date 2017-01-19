@@ -367,5 +367,36 @@ function ubb($content){
 
     return $content;
 }
+//生成缩略图
+function thumb($filename,$zoom_percent){
+    //1.生成PNG标头文件
+    header('Content-Type','image/png');
+   //获取原始图片的扩展名
+    $ext_name=explode('.',$filename);
+   //2.获取原始文件的长和高
+    list($old_width,$old_height)=getimagesize($filename);
+   //3.定义缩略图的长和高
+    $new_width=$old_width*$zoom_percent;
+    $new_height=$old_height*$zoom_percent;
+   //4.创建一个$zoom_percent,比如是0.3，缩放比例的画布
+    $new_dst_image=imagecreatetruecolor($new_width,$new_height);
+   //5.按照已有的原始图片创建一个画布
+    switch ($ext_name[1]){
+        case 'jpg':$old_src_image=imagecreatefromjpeg($filename);
+            break;
+        case 'png':$old_src_image=imagecreatefrompng($filename);
+            break;
+        case 'gif':$old_src_image=imagecreatefromgif($filename);
+            break;
+    }
+   //6.将原图图片采样复制填充到到新画布上
+    imagecopyresampled($new_dst_image,$old_src_image,0,0,0,0,$new_width,$new_height,$old_width,$old_height);
+   //7.输出图像
+    imagepng($new_dst_image);
+    //销毁资源
+    imagedestroy($new_dst_image);
+    imagedestroy($old_src_image);
+
+}
 
 
