@@ -25,7 +25,7 @@ if ($_GET['action']=='upload'){
     //判断[文件类型]是否是数组中规定的类型的一种，跟下面的switch效果是一样的，只不过写法更简化
     if (is_array($filemimes)){
         if (!in_array($_FILES['userfile']['type'],$filemimes)){
-            echo "<script>alert('本站只允许JPG格式的文件');history.back()</script>";
+            echo "<script>alert('本站只允许JPG,PNG格式的文件');history.back()</script>";
             exit();
         }
     }
@@ -79,7 +79,7 @@ if ($_GET['action']=='upload'){
 
     #学PHP 李炎恢38-42
     echo "<script>
-          alert('上传文件成功');window.opener.document.getElementById('albumurl').value='$uploaded_name';
+          alert('上传文件成功');window.opener.document.getElementById('imgurl').value='$uploaded_name';
           window.close();
           </script>";
 
