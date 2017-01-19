@@ -15,9 +15,9 @@ $sql="select album_id from bbs.bbs_album";
 //$sys['sys_blog']为后台系统设置指定的，每页的列表数
 paging_fault_tolerant($sql,$sys['photo']);
 
-//从数据库读取数据
+//从数据库读取相册数据
 $sql="select * from bbs.bbs_album ORDER BY album_date DESC LIMIT $_pagenum,$_pagesize";
-//取得 数据集
+//取得相册数据集
 $result=query($sql);
 
 ?>
