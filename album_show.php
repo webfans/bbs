@@ -13,7 +13,7 @@ require dirname(__FILE__).'/includes/common.inc.php';
 if (!isset($_COOKIE['username'])){
     alert_back('请登录后使用上传');
 }
-//取值
+//取得相册数据
 if ($_GET['id']){
     if (!!$rows=fetch_array("select album_id from bbs.bbs_album WHERE album_id='{$_GET['id']}'")){
         $get_album=array();
@@ -25,6 +25,9 @@ if ($_GET['id']){
 }else{
     alert_back('非法操作');
 }
+//取得照片数据
+$filename='album/1484808483/touxiang.jpg';
+$zoom=0.3;
 
 
 ?>
@@ -44,6 +47,7 @@ require ROOT_PATH.'includes/header.inc.php';
 
 <div id="album">
     <h2>照片展示</h2>
+    <img src="thumb.php?filename=<?php echo $filename;?>&zoom=<?php echo $zoom;?>">
     <p><a href="album_add_img.php?id=<?php echo $get_album['id']?>">上传图片</a></p>
 </div>
 
