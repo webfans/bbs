@@ -14,7 +14,7 @@ if ($_GET['action']=='upload'){
     block_fake_cookie();
     //开始上传照片
     //还有两个问题要处理
-    define('MAX_SIZE',2000000);
+    define('MAX_SIZE',4000000);
     //define('URL',dirname(__FILE__).'\album');
     //接受上传路径dir
     if (!isset($_GET['action'])=='dir'){
@@ -46,7 +46,7 @@ if ($_GET['action']=='upload'){
     }
     //#3.判断[配置文件大小]限制
     if ($_FILES['userfile']['size']>MAX_SIZE){
-        echo "<script>alert('上传文件超过内定文件限制大小2兆');history.back();</script>";
+        echo "<script>alert('上传文件超过内定文件限制大小4兆');history.back();</script>";
     }
   ##################################################
     //is_uploaded_file()
@@ -57,7 +57,7 @@ if ($_GET['action']=='upload'){
      #4.1获取文件扩展名 myname.jpg //$ext_name[0]=myname $file_name[1]=jpg 以时间戳重命名文件名time().'.'.$file_name[1]
      //$file_name=explode('.',$_FILES['userfile']['name']);
      //$uploaded_name=$_POST['dir'].'/'.time().'.'.$file_name[1];//这样就可以避免相同文件名的覆盖问题了
-     $uploaded_name=$_POST['dir'].'/'.$_FILES['userfile']['name'];//这样就可以避免相同文件名的覆盖问题了
+     $uploaded_name=$_POST['dir'].'/'.$_FILES['userfile']['name'];//保持原来的名
 
     if (is_uploaded_file($_FILES['userfile']['tmp_name'])){
         //move_uploaded_file(临时文件地址，你要存放的地址)移动文件到指定的地方
