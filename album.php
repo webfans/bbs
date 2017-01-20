@@ -59,7 +59,7 @@ require ROOT_PATH.'includes/header.inc.php';
     ?>
         <dl>
             <dt><?php echo  $_album['corver_html']?></dt>
-            <dd><a href="album_show.php?id=<?php echo $_album['id']?>"><?php echo $_album['name']?><?php echo $_album['type_html']?></a></dd>
+            <dd><a href="album_show.php?dirid=<?php echo $_album['id']?>"><?php echo $_album['name']?><?php echo $_album['type_html']?></a></dd>
             <?php
             if (isset($_COOKIE['username']) && isset($_SESSION['admin'])) {
                 if ($_COOKIE['username']==$_SESSION['admin']){
