@@ -349,7 +349,11 @@ require ROOT_PATH.'includes/header.inc.php';
                     <?php require ROOT_PATH.'includes/ubb.inc.php'; ?>
                     <textarea  name="content" rows="10"></textarea></dd>
                 <dd>
-                    验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/>
+                    <?php
+                    if ($sys['vcode']==1){
+                        echo  '验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/>';
+                    }
+                    ?>
                     <input type="submit" name="submit" class="submit" value="发送文章">
                 </dd>
             </dl>
