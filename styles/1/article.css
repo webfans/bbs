@@ -258,11 +258,12 @@
     height: 19px;
     border: 1px dashed #333;
     background: #fff;
-    margin-left: 60px;
+    margin-left: 20px;
     cursor: pointer;
 }
 #article dl dd input.submit:hover{
-    background: #eee;
+    background: #0066FF;
+    color: #fff;
 }
 #article dl dd img#vcode{
     position: relative;
