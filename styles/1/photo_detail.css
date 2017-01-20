@@ -1,0 +1,159 @@
+#photo{
+    width:auto;
+    height: auto;
+    border: 2px solid #ccc;
+    font-size: 12px;
+}
+#photo h2{
+    font-size: 12px;
+    text-indent: 0;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+#photo dl.detail{
+    text-align: center;
+    margin: 20px;
+}
+#photo dl.detail dd{
+    margin: 5px;
+}
+#photo dl.detail dd.name{
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+}
+#photo p.line{
+    clear: both;
+    height: 10px;
+    margin: 0 auto;
+    width: 95%;
+    border-bottom: 1px dashed #333;
+}
+/*评论照片的表单，复制自article.php的跟帖表单，artcicle.css，以后有时间做一个包含文件，调用*/
+#photo dl.re_photo{
+    width:500px;
+    margin:0 auto;
+    position: relative;
+}
+#photo dl.re_photo dt{
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+}
+#photo dl.re_photo dd{
+    margin: 10px 0;
+}
+#photo dl.re_photo dd a{
+    text-decoration: none;
+    color: #000000;
+    margin: 10px;
+}
+#photo dl.re_photo dd a:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
+#photo dl.re_photo dd label{
+    cursor: pointer;
+
+    height: 20px;
+    padding: 0 5px 0 0;
+}
+#photo dl.re_photo dd div#font{
+    width: 125px;
+    height: 50px;
+    background: #eee;
+    border: 1px dashed #333;
+    padding: 5px;
+    line-height: 20px;
+    position: absolute;
+    top:84px;
+    left:5px;
+}
+
+#photo dl.re_photo dd div#font strong{
+    font-weight: normal;
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: default;
+
+}
+#photo dl.re_photo dd div#color{
+    display: none;
+    width: 147px;
+    height: 115px;
+    font-size: 12px;
+    background: #eee;
+    border: 1px dashed #333;
+    padding: 2px 0 0 2px;
+    position: absolute;
+    top:84px;
+    left:52px;
+}
+#photo dl.re_photo dd div#color strong{
+    border: 1px solid #999;
+    display: block;
+    width: 12px;
+    height: 12px;
+    float: left;
+    margin: 4px 0 0 4px;
+    cursor: pointer;
+}
+#photo dl.re_photo dd div#color em{
+    display: block;
+    height: 28px;
+    width: 80%;
+    clear: both;
+}
+#photo dl.re_photo dd div#color em input{
+    margin-top:2px;
+    margin-left:3px;
+    width: 140px;
+    height: 15px;
+    cursor: pointer;
+    background: #fff;
+}
+#photo dl.re_photo dd #ubb{
+    width: 410px;
+    height: 23px;
+    background: url("../../images/bgMenubar.gif");
+    border: 1px dashed #333;
+    border-bottom: 1px solid #666;
+    padding-top: 3px;
+
+}
+#photo dl.re_photo dd #ubb image{
+    display: block;
+    float: left;
+}
+#photo dl.re_photo dd textarea{
+    width: 410px;
+    border: 1px dashed #333;
+    background: #fff;
+    border-top: none;
+    overflow-y: auto;
+}
+#photo dl.re_photo dd input.text{
+    width: 220px;
+    height: 19px;
+    border: 1px dashed #333;
+    background: #fff;
+}
+#photo dl.re_photo dd input.yzm{
+    width: 60px;
+}
+#photo dl.re_photo dd input.submit{
+    width: 60px;
+    height: 19px;
+    border: 1px dashed #333;
+    background: #fff;
+    margin-left: 60px;
+    cursor: pointer;
+}
+#photo dl.re_photo dd input.submit:hover{
+    background: #eee;
+}
+#photo dl.re_photo dd img#vcode{
+    position: relative;
+    top: 8px;
+    cursor: pointer;
+}
