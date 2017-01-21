@@ -42,7 +42,7 @@ if ($_GET['action']=='addimg'){
                                         '{$img['sid']}'       
                                         ) 
               ");
-    after_query('图片添加成功','图片添加失败','album_show.php?id='.$img['sid']);
+    after_query('图片添加成功','图片添加失败','photo_show.php?id='.$img['sid']);
 
 }
 //取得相册数据
