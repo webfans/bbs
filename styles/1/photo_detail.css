@@ -157,3 +157,127 @@
     top: 8px;
     cursor: pointer;
 }
+/*复制自article.css*/
+#photo div.content{
+    float: right;
+    width: 680px;
+    height: auto;
+    padding: 0 20px 0 0;
+}
+#photo div.content .user{
+    background: url("../../images/member.gif") no-repeat left center;
+    border-bottom: 1px dashed #999;
+    color: #666666;
+    padding: 0 0 0 20px;
+    line-height: 30px;
+    height: 30px;
+}
+#photo div.content .user span{
+    float: right;
+    color:#06f;
+}
+#photo div.content h3{
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+}
+#photo div.content h3 span{
+    font-weight: normal;
+    color:#06F;
+    font-size: 12px;
+}
+#photo div.content h3 span a{
+    text-decoration: none;
+}
+#photo div.content h3 span a:hover{
+    color: #FF6600;
+}
+#photo div.content h3 img{
+    position: relative;
+    top:2px;
+}
+#photo div.content .detail{
+    line-height: 200%;
+    font-size: 14px;
+}
+#photo div.content .detail p.autograph{
+    color: #666;
+    border-bottom: 1px dashed #666666;
+    margin:5px 0;
+    padding:5px;
+    width: 70%;
+}
+#photo div.content .detail a{
+    text-decoration: none;
+    color: #33cccc;
+}
+#photo div.content .detail a:hover{
+    text-decoration: underline;
+    color: #f60;
+}
+#photo div.content .read{
+    color: #777;
+    margin-top:10px;
+}
+/*照片评论显示界面，复制自article.css */
+#photo div.re dl{
+    width: 180px;
+    text-align: center;/*不知道为什么不能居中*/
+    padding-left:40px;
+    float: left;
+}
+#photo div.re dl dt{
+    width: 150px;
+    margin:0 0 5px 0;
+}
+#photo div.re dl dt img{
+    margin:0 auto;
+    display: block;
+}
+#photo div.re dl dd{
+    height: 15px;
+    line-height: 20px;
+    margin-top:5px;
+    margin-bottom:5px;
+    width: 75px;
+    float: left;
+
+}
+#photo div.re dl dd.user{
+    clear: both;
+    width: 150px;
+    color: #f60;
+}
+#photo div.re dl dd.photo{
+    clear: both;
+    width: 150px;
+    color: #f60;
+}
+#photo div.re dl dd.message{
+    background: url("../../images/x1.gif") no-repeat 10% 35%;
+}
+#photo div.re dl dd a:hover{
+    cursor: pointer;
+}
+
+#photo div.re dl dd.friend{
+    background: url("../../images/x2.gif") no-repeat left center;
+}
+#photo div.re dl dd.guest{
+    background: url("../../images/x3.gif") no-repeat 10% 35%;
+}
+#photo div.re dl dd.flower{
+    background: url("../../images/x4.gif") no-repeat left center;
+}
+#photo div.re dl dd.email,#photo div.re dl dd.url{
+    width:180px;
+    text-align: left;
+}
+#photo div.re dl dd.email a,#photo div.re dl dd.url a{
+    text-decoration: none;
+    font-style: normal;
+    color: #333333;
+}
+#photo div.re dl dd.email a:hover,#photo div.re dl dd.url a:hover{
+    text-decoration: underline;
+}
