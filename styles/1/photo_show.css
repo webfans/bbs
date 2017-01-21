@@ -1,0 +1,39 @@
+#album{
+    width:auto;
+    height: auto;
+    border: 2px solid #ccc;
+    font-size: 12px;
+}
+#album h2{
+    font-size: 12px;
+    text-indent: 0;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+#album p {
+    text-align: center;
+    padding: 20px;
+    clear: both;
+}
+#album p a{
+    font-size: 14px;
+    color: #333;
+}
+#album dl{
+    float: left;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+
+}
+#album dl dt img{
+    border: none;
+}
+#album dl dd{
+    padding: 2px;
+}
+#album dl dd a{
+    text-decoration: none;
+    color: #333;
+}
