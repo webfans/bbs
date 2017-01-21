@@ -13,8 +13,10 @@ require dirname(__FILE__).'/includes/common.inc.php';
 if (@$_GET['action']=='modify'){
     include ROOT_PATH.'includes/check.func.php';
     //验证码
-    check_vcode($_POST['vcode'],$_SESSION['vcode']);
-
+    global $sys;
+    if ($sys['vcode']==1){
+        check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    }
     // 如果cookie存在，才允许提交修改数据验证
     if (!!$rows=fetch_array("select u_uniqid from bbs_user where u_username='{$_COOKIE['username']}'")){
         //为了防止Cookie伪造，还要比对一下唯一标识符uniqid
@@ -174,7 +176,11 @@ require ROOT_PATH.'includes/header.inc.php';
                     个性签名：<?php echo $html['switch_html'];?>&nbsp;(支持UBB)
                     <p><textarea name="autograph" rows="3" cols="25"><?php echo $html['autograph']?></textarea></p>
                 </dd>
-                <dd>验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/> </dd>
+                <?php
+                if ($sys['vcode']==1){
+                    echo  '验 证 码：<input type="text" name="vcode" class="text yzm" value=""> <img src="vcode.php" id="vcode"/>';
+                }
+                ?>
                 <dd><input type="submit" name="submit" class="submit" value="修改资料"> </dd>
             </dl>
         </form>

@@ -11,16 +11,18 @@ define('SCRIPT','article');
 require dirname(__FILE__).'/includes/common.inc.php';
 //处理跟贴
 if ($_GET['action']=='RE'){
+    global $sys;
     //include 在需要时引入
     include ROOT_PATH.'includes/check.func.php';
     #安全验证#
     //1.验证码验证
-    //check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    if ($sys['vcode']==1){
+        check_vcode($_POST['vcode'],$_SESSION['vcode']);
+    }
     //2.对比唯一标识符
     if (!!$row=fetch_array("select u_uniqid,u_replytime from bbs_user where u_username='{$_COOKIE['username']}'")){
         safe_uniqid($row['u_niqid'],$_SESSION['uniqid']);
         //限制频繁跟帖
-        global $sys;
         //post_checktime(time(),$_COOKIE['first_replytime'],30);
         post_checktime(time(),$row['u_replytime'],$sys['relplylimit']);
         //接受跟贴表单数据
